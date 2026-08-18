@@ -258,12 +258,12 @@ function MainApp() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-white space-y-4">
-        <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl animate-pulse">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-50/40 flex flex-col items-center justify-center text-slate-800 space-y-4">
+        <div className="p-3 rounded-2xl bg-white shadow-xl border border-slate-200/80 animate-pulse">
           <CollegeLogo size={64} />
         </div>
-        <div className="flex items-center gap-2 text-sm text-slate-300">
-          <Loader2 className="h-4 w-4 animate-spin text-indigo-400" />
+        <div className="flex items-center gap-2 text-sm text-slate-600 font-medium">
+          <Loader2 className="h-4 w-4 animate-spin text-indigo-600" />
           <span>กำลังโหลดข้อมูลระบบคาเฟ่...</span>
         </div>
       </div>
