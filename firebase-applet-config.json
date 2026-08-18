@@ -1,0 +1,12 @@
+{
+  "projectId": "cafe-cd",
+  "appId": "1:869329640666:web:d2b9a2ef8c29ce0d9519e3",
+  "apiKey": "AIzaSyBOHMVjXBGMp09yvcQpna1J2TC8_0B0x6I",
+  "authDomain": "cafe-cd.firebaseapp.com",
+  "firestoreDatabaseId": "ai-studio-cafeincomeexpens-3256e55c-e48e-4122-93a7-7f05be64e4d5",
+  "storageBucket": "cafe-cd.firebasestorage.app",
+  "messagingSenderId": "869329640666",
+  "measurementId": "",
+  "oAuthClientId": "869329640666-0p0mf8jo460j1r1rv9mf9ql35mkmuj5r.apps.googleusercontent.com",
+  "recaptchaSiteKey": ""
+}

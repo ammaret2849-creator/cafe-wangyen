@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #F8FAFC;
+    color: #0F172A;
+    font-family: 'Prompt', 'Plus Jakarta Sans', 'Noto Sans Thai', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Prompt', 'Plus Jakarta Sans', system-ui, sans-serif;
+    color: #0F172A;
+  }
+
+  /* Smooth inputs and buttons */
+  input, select, textarea, button {
+    font-family: inherit;
+  }
+}
+
+/* Custom scrollbar for modern slate UI */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Print Stylesheet for clean A4 and Thermal receipt printing */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 12pt;
+  }
+  
+  header, footer, nav, .print\:hidden {
+    display: none !important;
+  }
+
+  #printable-area {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  @page {
+    margin: 1cm;
+    size: auto;
+  }
+}

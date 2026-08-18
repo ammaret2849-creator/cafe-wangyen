@@ -1,0 +1,466 @@
+import React, { useState } from 'react';
+import { 
+  Phone, 
+  Lock, 
+  User, 
+  Mail, 
+  Coffee, 
+  ShieldCheck, 
+  CheckCircle2, 
+  ArrowRight, 
+  Sparkles, 
+  Eye, 
+  EyeOff, 
+  Crown, 
+  Briefcase, 
+  Loader2, 
+  TrendingUp, 
+  QrCode, 
+  Layers, 
+  Calendar,
+  LogIn,
+  UserPlus
+} from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { CollegeLogo } from './CollegeLogo';
+import { getTodayDateThai } from '../utils/formatters';
+
+interface LoginPageProps {
+  cafeName?: string;
+  cafeBranch?: string;
+  logoUrl?: string;
+}
+
+export const LoginPage: React.FC<LoginPageProps> = ({
+  cafeName = 'วังน้ำเย็น เทคนิคคอล คาเฟ่',
+  cafeBranch = 'สาขาวิทยาลัยเทคนิควังน้ำเย็น',
+  logoUrl
+}) => {
+  const { 
+    signInWithGoogle, 
+    signInWithPhone, 
+    registerWithPhone 
+  } = useAuth();
+
+  // Mode: 'login' (เข้าสู่ระบบ) or 'register' (สมัครสมาชิก)
+  const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
+
+  // Form fields
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [role, setRole] = useState<'owner' | 'manager' | 'barista'>('barista');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const handleGoogleLogin = async () => {
+    try {
+      setLoading(true);
+      setErrorMsg('');
+      await signInWithGoogle();
+    } catch (err: any) {
+      console.error('Google login error:', err);
+      setErrorMsg(err?.message || 'ไม่สามารถเข้าสู่ระบบด้วย Google ได้ กรุณาลองใหม่อีกครั้ง');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg('');
+
+    if (!phoneNumber.trim()) {
+      setErrorMsg('กรุณากรอกเบอร์โทรศัพท์');
+      return;
+    }
+    if (!password.trim() || password.length < 4) {
+      setErrorMsg('รหัสผ่านต้องมีความยาวอย่างน้อย 4 ตัวอักษร');
+      return;
+    }
+
+    if (authMode === 'register') {
+      if (!name.trim()) {
+        setErrorMsg('กรุณากรอกชื่อ-นามสกุล หรือชื่อเรียกในร้าน');
+        return;
+      }
+      if (password !== confirmPassword) {
+        setErrorMsg('รหัสผ่านและการยืนยันรหัสผ่านไม่ตรงกัน');
+        return;
+      }
+    }
+
+    try {
+      setLoading(true);
+      if (authMode === 'register') {
+        await registerWithPhone(phoneNumber.trim(), name.trim(), password, role);
+      } else {
+        await signInWithPhone(phoneNumber.trim(), password);
+      }
+    } catch (err: any) {
+      console.error('Auth error:', err);
+      setErrorMsg(
+        err?.message || 
+        (authMode === 'login' 
+          ? 'เบอร์โทรศัพท์หรือรหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง' 
+          : 'ไม่สามารถลงทะเบียนได้ กรุณาลองใหม่อีกครั้ง')
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-indigo-600 selection:text-white relative overflow-hidden font-sans">
+      {/* Background Subtle Gradient Spheres */}
+      <div className="absolute top-0 left-1/4 -translate-y-1/2 w-[650px] h-[650px] rounded-full bg-indigo-900/20 blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-0 right-10 w-[550px] h-[550px] rounded-full bg-rose-950/20 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 right-1/3 w-[450px] h-[450px] rounded-full bg-amber-950/15 blur-[140px] pointer-events-none" />
+
+      {/* Top Bar on Cover */}
+      <header className="relative z-10 w-full border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md px-6 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <CollegeLogo size={42} customUrl={logoUrl} />
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-sm sm:text-base text-white tracking-tight">
+                  {cafeName}
+                </span>
+                <span className="rounded-md bg-rose-950/80 border border-rose-800/60 px-2 py-0.5 text-[10px] font-bold text-rose-300">
+                  {cafeBranch}
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-400">
+                วิทยาลัยเทคนิควังน้ำเย็น • ระบบสรุปรายรับ-รายจ่าย
+              </p>
+            </div>
+          </div>
+
+          <div className="hidden sm:flex items-center gap-3 text-xs text-slate-400">
+            <div className="flex items-center gap-1.5 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700">
+              <Calendar className="h-3.5 w-3.5 text-indigo-400" />
+              <span>{getTodayDateThai()}</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Cover Content */}
+      <main className="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 py-8 sm:py-12 sm:px-6 flex items-center">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          
+          {/* Left Column: Brand Hero & Presentation */}
+          <div className="lg:col-span-7 space-y-6 text-left">
+            {/* Top Badge */}
+            <div className="inline-flex items-center gap-2 rounded-2xl bg-indigo-950/80 border border-indigo-700/60 px-3.5 py-1.5 text-xs text-indigo-300 shadow-sm backdrop-blur-md">
+              <Sparkles className="h-3.5 w-3.5 text-indigo-400 animate-pulse" />
+              <span className="font-bold">ระบบบริหารจัดการคาเฟ่วิทยาลัย</span>
+              <span className="text-indigo-400">•</span>
+              <span className="text-indigo-200">ปีการศึกษา 2569</span>
+            </div>
+
+            {/* Main Headline */}
+            <div className="space-y-3">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+                ระบบบันทึกรายรับ - รายจ่าย <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-rose-300 to-amber-300">
+                  คาเฟ่ วิทยาลัยเทคนิควังน้ำเย็น
+                </span>
+              </h1>
+              <p className="text-sm sm:text-base text-slate-300 max-w-2xl font-normal leading-relaxed">
+                แพลตฟอร์มบริหารจัดการยอดขาย เครื่องดื่ม เบเกอรี่ และควบคุมต้นทุนวัตถุดิบรายวัน-รายเดือน พร้อมออกใบเสร็จรับเงิน QR Code และระบบวิเคราะห์ผลกำไรสุทธิ
+              </p>
+            </div>
+
+            {/* Feature Bento Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 backdrop-blur-md">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-950 text-emerald-400 border border-emerald-800/80">
+                    <TrendingUp className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-sm text-white">สรุปยอดขาย & กำไร</h3>
+                    <p className="text-xs text-slate-400">วิเคราะห์รายรับ-รายจ่าย Real-time</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 backdrop-blur-md">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-950 text-indigo-400 border border-indigo-800/80">
+                    <QrCode className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-sm text-white">ใบสลิป & คิวอาร์โค้ด</h3>
+                    <p className="text-xs text-slate-400">พิมพ์ใบเสร็จและตรวจสลิปย้อนหลัง</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 backdrop-blur-md">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-950 text-amber-400 border border-amber-800/80">
+                    <ShieldCheck className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-sm text-white">ความปลอดภัยและสิทธิ์</h3>
+                    <p className="text-xs text-slate-400">แยกสิทธิ์เจ้าของร้าน, ผู้จัดการ และบาริสต้า</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 backdrop-blur-md">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-950 text-rose-400 border border-rose-800/80">
+                    <Layers className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-sm text-white">แยกหมวดหมู่เครื่องดื่ม</h3>
+                    <p className="text-xs text-slate-400">กาแฟสด, ชา, เบเกอรี่, วัตถุดิบ</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Authentication Card */}
+          <div className="lg:col-span-5">
+            <div className="relative rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl p-6 sm:p-7 backdrop-blur-xl">
+              {/* Card Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+                <div>
+                  <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                    <span>{authMode === 'login' ? 'เข้าสู่ระบบใช้งาน' : 'สมัครสมาชิกใหม่'}</span>
+                  </h2>
+                  <p className="text-xs text-slate-400">
+                    {authMode === 'login' 
+                      ? 'กรุณากรอกเบอร์โทรศัพท์และรหัสผ่าน' 
+                      : 'กรอกข้อมูลเพื่อสร้างบัญชีผู้ใช้งานใหม่'}
+                  </p>
+                </div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-950 text-indigo-400 border border-indigo-800/80">
+                  {authMode === 'login' ? <LogIn className="h-5 w-5" /> : <UserPlus className="h-5 w-5" />}
+                </div>
+              </div>
+
+              {/* Segmented Tab Navigation: เข้าสู่ระบบ / สมัครสมาชิก */}
+              <div className="pt-4">
+                <div className="grid grid-cols-2 gap-1 p-1 bg-slate-950 rounded-2xl border border-slate-800 text-xs font-semibold">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAuthMode('login');
+                      setErrorMsg('');
+                    }}
+                    className={`flex items-center justify-center gap-2 py-2.5 rounded-xl transition-all ${
+                      authMode === 'login'
+                        ? 'bg-indigo-600 text-white font-bold shadow-xs'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    <LogIn className="h-3.5 w-3.5" />
+                    <span>เข้าสู่ระบบ</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAuthMode('register');
+                      setErrorMsg('');
+                    }}
+                    className={`flex items-center justify-center gap-2 py-2.5 rounded-xl transition-all ${
+                      authMode === 'register'
+                        ? 'bg-indigo-600 text-white font-bold shadow-xs'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    <UserPlus className="h-3.5 w-3.5" />
+                    <span>สมัครสมาชิก</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Error Message */}
+              {errorMsg && (
+                <div className="mt-4 rounded-2xl bg-rose-950/80 p-3 text-xs text-rose-200 border border-rose-800 font-semibold flex items-center gap-2">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-rose-800 text-white font-bold">!</span>
+                  <span>{errorMsg}</span>
+                </div>
+              )}
+
+              {/* Form Body */}
+              <form onSubmit={handleSubmit} className="mt-4 space-y-3.5">
+                {/* Full Name (Register mode only) */}
+                {authMode === 'register' && (
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                      <User className="h-3.5 w-3.5 text-slate-400" />
+                      ชื่อ - นามสกุล หรือชื่อเรียกในร้าน
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="เช่น สมชาย ใจดี (บาริสต้า)"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none"
+                    />
+                  </div>
+                )}
+
+                {/* Phone Number */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                    <Phone className="h-3.5 w-3.5 text-slate-400" />
+                    เบอร์โทรศัพท์ (ใช้เป็นชื่อผู้ใช้)
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    placeholder="เช่น 081-234-5678"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none font-mono"
+                  />
+                </div>
+
+                {/* Role selection (Register mode only) */}
+                {authMode === 'register' && (
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                      <Briefcase className="h-3.5 w-3.5 text-slate-400" />
+                      ตำแหน่ง / หน้าที่ในร้าน
+                    </label>
+                    <select
+                      value={role}
+                      onChange={(e) => setRole(e.target.value as any)}
+                      className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2.5 text-sm text-white focus:border-indigo-500 focus:outline-none"
+                    >
+                      <option value="barista">☕ บาริสต้า / พนักงานแคชเชียร์ (Staff)</option>
+                      <option value="manager">💼 ผู้จัดการร้าน (Manager)</option>
+                      <option value="owner">👑 เจ้าของร้าน / ผู้ดูแลระบบ (Owner)</option>
+                    </select>
+                  </div>
+                )}
+
+                {/* Password */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                    <Lock className="h-3.5 w-3.5 text-slate-400" />
+                    รหัสผ่าน (Password)
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      required
+                      placeholder="รหัสผ่านอย่างน้อย 4 ตัวอักษร"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full rounded-xl border border-slate-700 bg-slate-800 pl-3.5 pr-10 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none font-mono"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
+                    >
+                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Confirm Password (Register mode only) */}
+                {authMode === 'register' && (
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                      <Lock className="h-3.5 w-3.5 text-slate-400" />
+                      ยืนยันรหัสผ่านอีกครั้ง
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showConfirmPassword ? 'text' : 'password'}
+                        required
+                        placeholder="กรอกรหัสผ่านซ้ำอีกครั้ง"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        className="w-full rounded-xl border border-slate-700 bg-slate-800 pl-3.5 pr-10 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none font-mono"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
+                      >
+                        {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Submit Action Button */}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 py-3 text-sm font-bold text-white transition-all shadow-lg shadow-indigo-600/30 disabled:opacity-50 mt-2"
+                >
+                  {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                  <span>
+                    {loading 
+                      ? 'กำลังดำเนินการ...' 
+                      : (authMode === 'login' ? 'เข้าสู่ระบบ' : 'ลงทะเบียนและเข้าสู่ระบบ')}
+                  </span>
+                </button>
+              </form>
+
+              {/* Divider & Google Login Option */}
+              <div className="relative my-4">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-slate-800" />
+                </div>
+                <div className="relative flex justify-center text-xs">
+                  <span className="bg-slate-900 px-3 text-slate-400 font-medium">หรือ</span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleGoogleLogin}
+                disabled={loading}
+                className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-white py-2.5 px-4 text-xs sm:text-sm font-bold text-slate-800 hover:bg-slate-100 transition-all shadow-md disabled:opacity-50"
+              >
+                {loading ? (
+                  <Loader2 className="h-4 w-4 animate-spin text-slate-800" />
+                ) : (
+                  <svg className="h-4 w-4" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                  </svg>
+                )}
+                <span>เข้าสู่ระบบด้วย Google</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="relative z-10 w-full border-t border-slate-900 bg-slate-950/80 px-6 py-4 text-center text-xs text-slate-500">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <CollegeLogo size={24} customUrl={logoUrl} />
+            <span className="text-slate-400">วิทยาลัยเทคนิควังน้ำเย็น</span>
+            <span>• ระบบบริหารจัดการรายรับ-รายจ่าย คาเฟ่</span>
+          </div>
+          <p className="text-slate-600">
+            ระบบความปลอดภัยและฐานข้อมูลคลาวด์ พร้อมรองรับการพิมพ์สลิปและใบสรุปยอด
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+};
