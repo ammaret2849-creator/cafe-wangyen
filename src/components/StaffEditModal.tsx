@@ -118,27 +118,27 @@ export const StaffEditModal: React.FC<StaffEditModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-fade-in">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-sm animate-fade-in">
       <div 
-        className="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden"
+        className="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-stone-200 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white px-6 py-5 flex items-center justify-between">
+        <div className="bg-gradient-to-r from-stone-900 via-stone-800 to-amber-950 text-white px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-2xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-300">
-              {role === 'owner' ? <ShieldCheck className="h-5 w-5 text-amber-400" /> : role === 'manager' ? <Briefcase className="h-5 w-5 text-indigo-300" /> : <Coffee className="h-5 w-5 text-emerald-400" />}
+            <div className="h-10 w-10 rounded-2xl bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-amber-300">
+              {role === 'owner' ? <ShieldCheck className="h-5 w-5 text-amber-400" /> : role === 'manager' ? <Briefcase className="h-5 w-5 text-amber-200" /> : <Coffee className="h-5 w-5 text-emerald-400" />}
             </div>
             <div>
               <h3 className="text-base font-bold">
                 {staffToEdit ? 'แก้ไขข้อมูลตำแหน่ง/พนักงาน' : 'เพิ่มตำแหน่ง/พนักงานใหม่'}
               </h3>
-              <p className="text-xs text-slate-300">จัดการข้อมูลผู้ใช้งานและสิทธิ์การเข้าถึง</p>
+              <p className="text-xs text-stone-300">จัดการข้อมูลผู้ใช้งานและสิทธิ์การเข้าถึง</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-1.5 rounded-full text-stone-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
           >
             <X className="h-5 w-5" />
           </button>
@@ -155,46 +155,46 @@ export const StaffEditModal: React.FC<StaffEditModalProps> = ({
 
           {/* Role / Position Selector */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+            <label className="block text-xs font-semibold text-stone-700 mb-1.5">
               ตำแหน่งงานและสิทธิ์ (Role)
             </label>
             <div className="grid grid-cols-3 gap-2">
               <button
                 type="button"
                 onClick={() => setRole('owner')}
-                className={`py-2.5 px-3 rounded-xl border text-xs font-medium flex flex-col items-center gap-1 transition-all ${
+                className={`py-2.5 px-3 rounded-xl border text-xs font-medium flex flex-col items-center gap-1 transition-all cursor-pointer ${
                   role === 'owner'
-                    ? 'border-amber-500 bg-amber-50 text-amber-900 font-semibold ring-2 ring-amber-500/20 shadow-sm'
-                    : 'border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100'
+                    ? 'border-amber-600 bg-amber-50 text-amber-900 font-semibold ring-2 ring-amber-600/20 shadow-xs'
+                    : 'border-stone-200 bg-stone-50 text-stone-600 hover:bg-stone-100'
                 }`}
               >
-                <ShieldCheck className={`h-4 w-4 ${role === 'owner' ? 'text-amber-600' : 'text-slate-400'}`} />
+                <ShieldCheck className={`h-4 w-4 ${role === 'owner' ? 'text-amber-700' : 'text-stone-400'}`} />
                 <span>เจ้าของร้าน</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setRole('manager')}
-                className={`py-2.5 px-3 rounded-xl border text-xs font-medium flex flex-col items-center gap-1 transition-all ${
+                className={`py-2.5 px-3 rounded-xl border text-xs font-medium flex flex-col items-center gap-1 transition-all cursor-pointer ${
                   role === 'manager'
-                    ? 'border-indigo-500 bg-indigo-50 text-indigo-900 font-semibold ring-2 ring-indigo-500/20 shadow-sm'
-                    : 'border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100'
+                    ? 'border-stone-700 bg-stone-100 text-stone-900 font-semibold ring-2 ring-stone-700/20 shadow-xs'
+                    : 'border-stone-200 bg-stone-50 text-stone-600 hover:bg-stone-100'
                 }`}
               >
-                <Briefcase className={`h-4 w-4 ${role === 'manager' ? 'text-indigo-600' : 'text-slate-400'}`} />
+                <Briefcase className={`h-4 w-4 ${role === 'manager' ? 'text-stone-700' : 'text-stone-400'}`} />
                 <span>ผู้จัดการร้าน</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setRole('barista')}
-                className={`py-2.5 px-3 rounded-xl border text-xs font-medium flex flex-col items-center gap-1 transition-all ${
+                className={`py-2.5 px-3 rounded-xl border text-xs font-medium flex flex-col items-center gap-1 transition-all cursor-pointer ${
                   role === 'barista'
-                    ? 'border-emerald-500 bg-emerald-50 text-emerald-900 font-semibold ring-2 ring-emerald-500/20 shadow-sm'
-                    : 'border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100'
+                    ? 'border-emerald-600 bg-emerald-50 text-emerald-900 font-semibold ring-2 ring-emerald-600/20 shadow-xs'
+                    : 'border-stone-200 bg-stone-50 text-stone-600 hover:bg-stone-100'
                 }`}
               >
-                <Coffee className={`h-4 w-4 ${role === 'barista' ? 'text-emerald-600' : 'text-slate-400'}`} />
+                <Coffee className={`h-4 w-4 ${role === 'barista' ? 'text-emerald-700' : 'text-stone-400'}`} />
                 <span>บาริสต้า/พนักงาน</span>
               </button>
             </div>
@@ -202,61 +202,61 @@ export const StaffEditModal: React.FC<StaffEditModalProps> = ({
 
           {/* Name Field */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-stone-700 mb-1">
               ชื่อผู้ใช้งาน / ชื่อพนักงาน <span className="text-rose-500">*</span>
             </label>
             <div className="relative">
-              <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400" />
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="เช่น คุณสมชาย, คุณวิภาดา, บาริสต้าโบว์"
                 required
-                className="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-600 transition-all text-slate-900"
+                className="w-full pl-9 pr-3 py-2.5 text-sm bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-700/30 focus:border-amber-700 transition-all text-stone-900"
               />
             </div>
           </div>
 
           {/* Phone Number Field */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-stone-700 mb-1">
               เบอร์โทรศัพท์สำหรับเข้าสู่ระบบ <span className="text-rose-500">*</span>
             </label>
             <div className="relative">
-              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400" />
               <input
                 type="tel"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 placeholder="เช่น 081-234-5678"
                 required
-                className="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-600 transition-all text-slate-900 font-mono"
+                className="w-full pl-9 pr-3 py-2.5 text-sm bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-700/30 focus:border-amber-700 transition-all text-stone-900 font-mono"
               />
             </div>
           </div>
 
           {/* Password Field */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-stone-700 mb-1">
               รหัสผ่าน (PIN / Password)
             </label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400" />
               <input
                 type="text"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="เช่น 1234"
-                className="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-600 transition-all text-slate-900 font-mono"
+                className="w-full pl-9 pr-3 py-2.5 text-sm bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-700/30 focus:border-amber-700 transition-all text-stone-900 font-mono"
               />
             </div>
-            <p className="text-[11px] text-slate-400 mt-1">ใช้สำหรับการเข้าสู่ระบบแบบระบุรหัสผ่าน (ค่าเริ่มต้น: 1234)</p>
+            <p className="text-[11px] text-stone-400 mt-1">ใช้สำหรับการเข้าสู่ระบบแบบระบุรหัสผ่าน (ค่าเริ่มต้น: 1234)</p>
           </div>
 
           {/* Note / Responsibility */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-stone-700 mb-1">
               หน้าที่รับผิดชอบ / คำอธิบาย
             </label>
             <input
@@ -264,12 +264,12 @@ export const StaffEditModal: React.FC<StaffEditModalProps> = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="เช่น ประจำกะเช้า, ดูแลสต็อกวัตถุดิบ"
-              className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-600 transition-all text-slate-800"
+              className="w-full px-3 py-2 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-700/30 focus:border-amber-700 transition-all text-stone-800"
             />
           </div>
 
           {/* Action Buttons */}
-          <div className="pt-2 flex items-center justify-between gap-3 border-t border-slate-100">
+          <div className="pt-2 flex items-center justify-between gap-3 border-t border-stone-100">
             {staffToEdit ? (
               isDeleting ? (
                 <div className="flex items-center gap-2">
@@ -278,14 +278,14 @@ export const StaffEditModal: React.FC<StaffEditModalProps> = ({
                     type="button"
                     onClick={handleDelete}
                     disabled={saving}
-                    className="px-2.5 py-1.5 rounded-lg bg-rose-600 text-white text-xs font-bold hover:bg-rose-700 shadow-sm"
+                    className="px-2.5 py-1.5 rounded-lg bg-rose-600 text-white text-xs font-bold hover:bg-rose-700 shadow-xs cursor-pointer"
                   >
                     ลบทันที
                   </button>
                   <button
                     type="button"
                     onClick={() => setIsDeleting(false)}
-                    className="px-2 py-1.5 rounded-lg bg-slate-100 text-slate-600 text-xs hover:bg-slate-200"
+                    className="px-2 py-1.5 rounded-lg bg-stone-100 text-stone-600 text-xs hover:bg-stone-200 cursor-pointer"
                   >
                     ยกเลิก
                   </button>
@@ -294,7 +294,7 @@ export const StaffEditModal: React.FC<StaffEditModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsDeleting(true)}
-                  className="px-3 py-2 rounded-xl text-rose-600 hover:bg-rose-50 border border-rose-200 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                  className="px-3 py-2 rounded-xl text-rose-600 hover:bg-rose-50 border border-rose-200 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <Trash2 className="h-4 w-4" />
                   <span>ลบตำแหน่งนี้</span>
@@ -306,14 +306,14 @@ export const StaffEditModal: React.FC<StaffEditModalProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-xs font-semibold hover:bg-slate-50 transition-colors"
+                className="px-4 py-2.5 rounded-xl border border-stone-200 text-stone-600 text-xs font-semibold hover:bg-stone-50 transition-colors cursor-pointer"
               >
                 ปิด
               </button>
               <button
                 type="submit"
                 disabled={saving}
-                className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-md shadow-indigo-600/20 transition-all disabled:opacity-50"
+                className="px-5 py-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all disabled:opacity-50 cursor-pointer"
               >
                 <Save className="h-4 w-4" />
                 <span>{saving ? 'กำลังบันทึก...' : 'บันทึกข้อมูล'}</span>

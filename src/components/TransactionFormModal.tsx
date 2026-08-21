@@ -205,82 +205,74 @@ export const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
   const currentCategories = type === 'income' ? DEFAULT_INCOME_CATEGORIES : DEFAULT_EXPENSE_CATEGORIES;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-3 sm:p-4 backdrop-blur-xs overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/60 p-2 sm:p-4 backdrop-blur-xs overflow-y-auto">
       <div 
-        className="relative my-6 flex max-h-[94vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white border border-slate-200 text-slate-900 shadow-2xl"
+        className="relative my-3 sm:my-6 flex max-h-[96vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl bg-white border border-stone-200 text-stone-900 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4 bg-slate-50">
-          <div className="flex items-center gap-3">
-            <div className={`flex h-10 w-10 items-center justify-center rounded-xl font-bold ${
+        <div className="flex items-center justify-between border-b border-stone-200 px-4 py-3 bg-stone-50">
+          <div className="flex items-center gap-2.5">
+            <div className={`flex h-8 w-8 items-center justify-center rounded-lg font-bold ${
               type === 'income' 
-                ? 'bg-emerald-50 text-emerald-600 border border-emerald-200' 
-                : 'bg-rose-50 text-rose-600 border border-rose-200'
+                ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' 
+                : 'bg-rose-50 text-rose-700 border border-rose-200'
             }`}>
-              <DollarSign className="h-5 w-5" />
+              <DollarSign className="h-4 w-4" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <h2 className="font-bold text-lg text-slate-900">
+              <div className="flex items-center gap-1.5">
+                <h2 className="font-bold text-sm sm:text-base text-stone-900">
                   {initialData ? 'แก้ไขข้อมูลบันทึกรายการ' : (type === 'income' ? 'บันทึกรายรับคาเฟ่' : 'บันทึกรายจ่ายคาเฟ่')}
                 </h2>
                 {initialData && (
-                  <span className="rounded-full bg-slate-200 px-2.5 py-0.5 text-[11px] font-semibold text-slate-700 border border-slate-300">
-                    โหมดแก้ไข
+                  <span className="rounded-full bg-stone-200 px-2 py-0.5 text-[10px] font-semibold text-stone-700 border border-stone-300">
+                    แก้ไข
                   </span>
                 )}
               </div>
-              <p className="text-xs text-slate-500">
+              <p className="text-[11px] text-stone-500">
                 {type === 'income' 
-                  ? 'ยอดขายเครื่องดื่ม เบเกอรี่ สินค้า และบริการของร้าน' 
-                  : 'ต้นทุนวัตถุดิบ เมล็ดกาแฟ บรรจุภัณฑ์ ค่าเช่า และค่าใช้จ่ายต่างๆ'}
+                  ? 'ยอดขายเครื่องดื่ม เบเกอรี่ สินค้า และบริการ' 
+                  : 'ต้นทุนวัตถุดิบ เมล็ดกาแฟ บรรจุภัณฑ์ ค่าเช่า และค่าใช้จ่าย'}
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="rounded-xl p-2 text-slate-400 hover:bg-slate-200 hover:text-slate-700 transition-colors"
+            className="rounded-lg p-1.5 text-stone-400 hover:bg-stone-200 hover:text-stone-700 transition-colors cursor-pointer"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" />
           </button>
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit} className="overflow-y-auto p-6 space-y-5 flex-1">
-          {/* Income / Expense Switcher (Always accessible so users can switch type if mistyped) */}
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-700 flex items-center justify-between">
-              <span>ประเภทรายการ (Transaction Type)</span>
-              {initialData && (
-                <span className="text-[11px] text-slate-500 font-normal flex items-center gap-1">
-                  <ArrowRightLeft className="h-3 w-3" /> สามารถสลับเปลี่ยนประเภทได้
-                </span>
-              )}
-            </label>
-            <div className="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-xl border border-slate-200">
+        <form onSubmit={handleSubmit} className="overflow-y-auto p-4 space-y-3.5 flex-1">
+          {/* Income / Expense Switcher */}
+          <div className="space-y-1">
+            <div className="grid grid-cols-2 gap-1.5 p-1 bg-stone-100 rounded-xl border border-stone-200">
               <button
                 type="button"
                 onClick={() => handleTypeChange('income')}
-                className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-bold transition-all ${
+                className={`flex items-center justify-center gap-1.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   type === 'income'
-                    ? 'bg-emerald-600 text-white shadow-xs'
-                    : 'text-slate-700 hover:text-slate-900 hover:bg-white/60'
+                    ? 'bg-emerald-600 text-white shadow-2xs'
+                    : 'text-stone-700 hover:text-stone-900 hover:bg-white/60'
                 }`}
               >
-                <Plus className="h-4 w-4" />
+                <Plus className="h-3.5 w-3.5" />
                 รายรับ (Income +)
               </button>
               <button
                 type="button"
                 onClick={() => handleTypeChange('expense')}
-                className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-bold transition-all ${
+                className={`flex items-center justify-center gap-1.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   type === 'expense'
-                    ? 'bg-rose-600 text-white shadow-xs'
-                    : 'text-slate-700 hover:text-slate-900 hover:bg-white/60'
+                    ? 'bg-rose-600 text-white shadow-2xs'
+                    : 'text-stone-700 hover:text-stone-900 hover:bg-white/60'
                 }`}
               >
-                <DollarSign className="h-4 w-4" />
+                <DollarSign className="h-3.5 w-3.5" />
                 รายจ่าย (Expense -)
               </button>
             </div>
@@ -288,18 +280,18 @@ export const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
 
           {/* Quick Cafe Presets */}
           {!initialData && (
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-              <div className="flex items-center gap-1.5 mb-2">
-                <Sparkles className="h-3.5 w-3.5 text-indigo-600" />
-                <span className="text-xs font-bold text-slate-700">รายการด่วนของคาเฟ่ (Quick Presets)</span>
+            <div className="rounded-xl border border-stone-200 bg-stone-50 p-2 sm:p-2.5">
+              <div className="flex items-center gap-1 mb-1.5">
+                <Sparkles className="h-3 w-3 text-amber-800" />
+                <span className="text-[11px] font-bold text-stone-700">รายการด่วน (Presets)</span>
               </div>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-1">
                 {QUICK_CAFE_PRESETS.map((preset, idx) => (
                   <button
                     key={idx}
                     type="button"
                     onClick={() => handleApplyPreset(preset)}
-                    className="rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700 hover:border-indigo-400 hover:bg-indigo-50 hover:text-indigo-700 transition-colors shadow-2xs"
+                    className="rounded-lg border border-stone-200 bg-white px-2 py-0.5 text-[11px] font-semibold text-stone-700 hover:border-amber-400 hover:bg-amber-50 hover:text-amber-900 transition-colors shadow-2xs cursor-pointer"
                   >
                     {preset.label}
                   </button>
@@ -309,17 +301,17 @@ export const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
           )}
 
           {/* Amount input & Quick buttons */}
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-700 flex items-center justify-between">
+          <div className="space-y-1">
+            <label className="text-[11px] font-bold text-stone-700 flex items-center justify-between">
               <span>จำนวนเงิน (บาท) <span className="text-rose-600">*</span></span>
               {amount && (
-                <span className="text-xs font-bold text-indigo-600">
+                <span className="text-xs font-bold text-amber-800">
                   = ฿{parseFloat(amount || '0').toLocaleString('th-TH', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
                 </span>
               )}
             </label>
             <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 text-xl font-bold">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400 text-lg font-bold">
                 ฿
               </div>
               <input
@@ -330,19 +322,19 @@ export const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
                 placeholder="0.00"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-11 pr-4 text-2xl font-extrabold text-slate-900 placeholder-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-1 focus:ring-indigo-600"
+                className="w-full rounded-xl border border-stone-300 bg-white py-2 pl-9 pr-3 text-xl font-extrabold text-stone-900 placeholder-stone-400 focus:border-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-100"
                 autoFocus
               />
             </div>
 
             {/* Quick Amount Buttons */}
-            <div className="flex flex-wrap items-center gap-1.5 pt-1">
+            <div className="flex flex-wrap items-center gap-1 pt-0.5">
               {[50, 100, 300, 500, 1000, 2000, 5000].map((val) => (
                 <button
                   key={val}
                   type="button"
                   onClick={() => handleQuickAddAmount(val)}
-                  className="rounded-lg border border-slate-200 bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700 hover:border-slate-300 hover:bg-white transition-colors"
+                  className="rounded-lg border border-stone-200 bg-stone-100 px-2 py-0.5 text-[11px] font-semibold text-stone-700 hover:border-stone-300 hover:bg-white transition-colors cursor-pointer"
                 >
                   +{val.toLocaleString()}
                 </button>
@@ -351,21 +343,21 @@ export const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setAmount('')}
-                  className="flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs text-slate-500 hover:text-rose-600 hover:border-rose-300 transition-colors"
+                  className="flex items-center gap-0.5 rounded-lg border border-stone-200 bg-white px-2 py-0.5 text-[11px] text-stone-500 hover:text-rose-600 hover:border-rose-300 transition-colors cursor-pointer"
                 >
-                  <RotateCcw className="h-3 w-3" />
-                  ล้างค่า
+                  <RotateCcw className="h-2.5 w-2.5" />
+                  ล้าง
                 </button>
               )}
             </div>
           </div>
 
           {/* Category Selector */}
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-700">
+          <div className="space-y-1">
+            <label className="text-[11px] font-bold text-stone-700">
               หมวดหมู่รายการ <span className="text-rose-600">*</span>
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
               {currentCategories.map((cat) => {
                 const isSelected = category === cat.name;
                 return (
@@ -373,14 +365,14 @@ export const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
                     key={cat.id}
                     type="button"
                     onClick={() => setCategory(cat.name)}
-                    className={`flex items-center gap-2 rounded-xl p-2.5 text-left text-xs font-semibold transition-all border ${
+                    className={`flex items-center gap-1.5 rounded-xl p-2 text-left text-xs font-semibold transition-all border cursor-pointer ${
                       isSelected
-                        ? 'border-indigo-600 bg-indigo-50 text-indigo-900 ring-1 ring-indigo-600'
-                        : 'border-slate-200 bg-slate-50 text-slate-800 hover:border-slate-300 hover:bg-white'
+                        ? 'border-amber-800 bg-amber-50 text-amber-950 ring-1 ring-amber-800'
+                        : 'border-stone-200 bg-stone-50 text-stone-800 hover:border-stone-300 hover:bg-white'
                     }`}
                   >
                     <span 
-                      className="h-3 w-3 rounded-full shrink-0 shadow-2xs" 
+                      className="h-2.5 w-2.5 rounded-full shrink-0 shadow-2xs" 
                       style={{ backgroundColor: cat.color }} 
                     />
                     <span className="truncate">{cat.name}</span>
@@ -391,27 +383,27 @@ export const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
           </div>
 
           {/* Date, Time & Quick Setters */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {/* Date Field */}
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                  <Calendar className="h-3.5 w-3.5 text-slate-400" />
+                <label className="text-[11px] font-bold text-stone-700 flex items-center gap-1">
+                  <Calendar className="h-3 w-3 text-stone-400" />
                   วันที่ทำรายการ <span className="text-rose-600">*</span>
                 </label>
                 <div className="flex items-center gap-1">
                   <button
                     type="button"
                     onClick={() => setDate(getTodayDateString())}
-                    className="text-[10px] text-indigo-600 font-bold hover:underline"
+                    className="text-[10px] text-amber-800 font-bold hover:underline cursor-pointer"
                   >
                     วันนี้
                   </button>
-                  <span className="text-slate-300 text-[10px]">•</span>
+                  <span className="text-stone-300 text-[10px]">•</span>
                   <button
                     type="button"
                     onClick={() => setDate(getYesterdayDateString())}
-                    className="text-[10px] text-slate-500 hover:text-slate-800"
+                    className="text-[10px] text-stone-500 hover:text-stone-800 cursor-pointer"
                   >
                     เมื่อวาน
                   </button>
@@ -422,21 +414,21 @@ export const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
                 required
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 focus:border-indigo-600 focus:outline-none"
+                className="w-full rounded-xl border border-stone-300 bg-white px-2.5 py-1.5 text-xs text-stone-900 focus:border-amber-700 focus:outline-none"
               />
             </div>
 
             {/* Time Field */}
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                  <Clock className="h-3.5 w-3.5 text-slate-400" />
+                <label className="text-[11px] font-bold text-stone-700 flex items-center gap-1">
+                  <Clock className="h-3 w-3 text-stone-400" />
                   เวลา (น.)
                 </label>
                 <button
                   type="button"
                   onClick={() => setTime(getCurrentTimeString())}
-                  className="text-[10px] text-indigo-600 font-bold hover:underline"
+                  className="text-[10px] text-amber-800 font-bold hover:underline cursor-pointer"
                 >
                   เวลาตอนนี้
                 </button>
@@ -445,142 +437,139 @@ export const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
                 type="time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 focus:border-indigo-600 focus:outline-none"
+                className="w-full rounded-xl border border-stone-300 bg-white px-2.5 py-1.5 text-xs text-stone-900 focus:border-amber-700 focus:outline-none"
               />
             </div>
           </div>
 
           {/* Payment Method & Reference Number */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                <CreditCard className="h-3.5 w-3.5 text-slate-400" />
-                ช่องทางการชำระเงิน <span className="text-rose-600">*</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div className="space-y-1">
+              <label className="text-[11px] font-bold text-stone-700 flex items-center gap-1">
+                <CreditCard className="h-3 w-3 text-stone-400" />
+                ช่องทางชำระเงิน <span className="text-rose-600">*</span>
               </label>
               <select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value as PaymentMethod)}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 focus:border-indigo-600 focus:outline-none"
+                className="w-full rounded-xl border border-stone-300 bg-white px-2.5 py-1.5 text-xs text-stone-900 focus:border-amber-700 focus:outline-none"
               >
                 <option value="qr_promptpay">QR Code / พร้อมเพย์</option>
                 <option value="transfer">โอนเงินธนาคาร</option>
                 <option value="cash">เงินสด (Cash)</option>
-                <option value="credit_card">บัตรเครดิต / บัตรเดบิต</option>
+                <option value="credit_card">บัตรเครดิต / เดบิต</option>
                 <option value="other">ช่องทางอื่นๆ</option>
               </select>
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                <Hash className="h-3.5 w-3.5 text-slate-400" />
-                เลขที่อ้างอิง / เลขที่บิล (Ref Number)
+            <div className="space-y-1">
+              <label className="text-[11px] font-bold text-stone-700 flex items-center gap-1">
+                <Hash className="h-3 w-3 text-stone-400" />
+                เลขที่อ้างอิง / เลขที่บิล
               </label>
               <input
                 type="text"
-                placeholder="เช่น INC-20260817-001 หรือ เล่มที่/เลขที่"
+                placeholder="เช่น INC-20260817-001"
                 value={referenceNumber}
                 onChange={(e) => setReferenceNumber(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-indigo-600 focus:outline-none"
+                className="w-full rounded-xl border border-stone-300 bg-white px-2.5 py-1.5 text-xs text-stone-900 placeholder-stone-400 focus:border-amber-700 focus:outline-none"
               />
             </div>
           </div>
 
           {/* Vendor / Customer & Note Details */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                <Building className="h-3.5 w-3.5 text-slate-400" />
-                {type === 'expense' ? 'ร้านค้า / คู่ค้า / ผู้รับเงิน' : 'ลูกค้า / ผู้จ่ายเงิน / หน่วยงาน'}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div className="space-y-1">
+              <label className="text-[11px] font-bold text-stone-700 flex items-center gap-1">
+                <Building className="h-3 w-3 text-stone-400" />
+                {type === 'expense' ? 'ร้านค้า / ผู้รับเงิน' : 'ลูกค้า / ผู้จ่ายเงิน'}
               </label>
               <input
                 type="text"
-                placeholder={type === 'expense' ? 'เช่น โรงคั่ว RoastLab, Makro, 7-Eleven, กฟน.' : 'เช่น ลูกค้าหน้าร้าน, บริษัท ดีไซน์ จำกัด'}
+                placeholder={type === 'expense' ? 'เช่น Makro, กฟน., ร้านกาแฟ' : 'เช่น ลูกค้าหน้าร้าน, บริษัท...'}
                 value={vendorOrCustomer}
                 onChange={(e) => setVendorOrCustomer(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-indigo-600 focus:outline-none"
+                className="w-full rounded-xl border border-stone-300 bg-white px-2.5 py-1.5 text-xs text-stone-900 placeholder-stone-400 focus:border-amber-700 focus:outline-none"
               />
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                <FileText className="h-3.5 w-3.5 text-slate-400" />
+            <div className="space-y-1">
+              <label className="text-[11px] font-bold text-stone-700 flex items-center gap-1">
+                <FileText className="h-3 w-3 text-stone-400" />
                 บันทึกรายละเอียด / หมายเหตุ
               </label>
               <input
                 type="text"
-                placeholder="เช่น เมล็ดกาแฟ House Blend 5 กก., ค่าขนส่ง, ค่ากาแฟจัดเลี้ยง"
+                placeholder="เช่น เมล็ดกาแฟ 5 กก., ค่าขนส่ง"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-indigo-600 focus:outline-none"
+                className="w-full rounded-xl border border-stone-300 bg-white px-2.5 py-1.5 text-xs text-stone-900 placeholder-stone-400 focus:border-amber-700 focus:outline-none"
               />
             </div>
           </div>
 
           {/* Attachment: Slip / Receipt Upload Area */}
-          <div className="space-y-2 pt-2 border-t border-slate-200">
+          <div className="space-y-1.5 pt-1.5 border-t border-stone-200">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-bold text-slate-700 flex items-center gap-2">
-                <Upload className="h-4 w-4 text-indigo-600" />
-                แนบสลิป / ใบเสร็จรับเงิน (Slip Attachment)
+              <label className="text-[11px] font-bold text-stone-700 flex items-center gap-1">
+                <Upload className="h-3 w-3 text-amber-800" />
+                แนบสลิป / ใบเสร็จ
               </label>
-              <span className="text-[11px] text-indigo-600 font-bold flex items-center gap-1">
-                <QrCode className="h-3.5 w-3.5" />
-                ระบบจะสร้าง QR Code อัตโนมัติสำหรับรายงานพิมพ์
+              <span className="text-[10px] text-amber-800 font-bold flex items-center gap-1">
+                <QrCode className="h-3 w-3" />
+                มี QR Code บนรายงานพิมพ์
               </span>
             </div>
 
             {slipUrl ? (
-              <div className="relative rounded-xl border border-slate-200 bg-slate-50 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div className="flex items-center gap-4 min-w-0">
+              <div className="relative rounded-xl border border-stone-200 bg-stone-50 p-2.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
+                <div className="flex items-center gap-2.5 min-w-0">
                   <div className="relative group cursor-pointer shrink-0" onClick={() => setShowSlipPreviewModal(true)}>
                     <img
                       src={slipThumbnail || slipUrl}
                       alt="Receipt thumbnail"
-                      className="h-16 w-16 rounded-lg object-cover border border-slate-200 shadow-xs group-hover:opacity-90 transition-opacity"
+                      className="h-12 w-12 rounded-xl object-cover border border-stone-200 shadow-2xs group-hover:opacity-90 transition-opacity"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 rounded-lg transition-opacity">
-                      <Maximize2 className="h-4 w-4 text-white" />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity">
+                      <Maximize2 className="h-3.5 w-3.5 text-white" />
                     </div>
                   </div>
                   <div className="min-w-0">
-                    <p className="text-sm font-bold text-slate-900 truncate max-w-xs">
-                      {slipFileName || 'สลิปหลักฐานที่แนบ'}
+                    <p className="text-xs font-bold text-stone-900 truncate max-w-[180px] sm:max-w-xs">
+                      {slipFileName || 'สลิปหลักฐาน'}
                     </p>
-                    <p className="text-xs text-emerald-600 font-bold flex items-center gap-1 mt-0.5">
-                      <Check className="h-3.5 w-3.5 text-emerald-600" /> แนบไฟล์พร้อมแสดงผลในรายงานแล้ว
-                    </p>
-                    <p className="text-[11px] text-slate-500 mt-0.5">
-                      คลิกที่ภาพเพื่อดูตัวอย่างขยาย หรือกดเปลี่ยนสลิป
+                    <p className="text-[10px] text-emerald-600 font-bold flex items-center gap-0.5 mt-0.5">
+                      <Check className="h-3 w-3 text-emerald-600" /> แนบไฟล์เรียบร้อยแล้ว
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                <div className="flex items-center gap-1.5 shrink-0 self-end sm:self-center">
                   <button
                     type="button"
                     onClick={() => setShowSlipPreviewModal(true)}
-                    className="flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-100 transition-colors"
+                    className="flex items-center gap-1 rounded-lg border border-stone-200 bg-white px-2 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-100 transition-colors cursor-pointer"
                   >
-                    <Eye className="h-3.5 w-3.5" />
-                    ดูรูปภาพ
+                    <Eye className="h-3 w-3" />
+                    ดูรูป
                   </button>
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-100 transition-colors"
+                    className="flex items-center gap-1 rounded-lg border border-stone-200 bg-white px-2 py-1 text-xs font-semibold text-stone-700 hover:bg-stone-100 transition-colors cursor-pointer"
                   >
-                    <Upload className="h-3.5 w-3.5 text-indigo-600" />
-                    เปลี่ยนไฟล์
+                    <Upload className="h-3 w-3 text-amber-800" />
+                    เปลี่ยน
                   </button>
                   <button
                     type="button"
                     onClick={handleRemoveSlip}
-                    className="flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-3 py-1.5 text-xs font-bold text-rose-600 hover:bg-rose-100 transition-colors"
+                    className="flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-bold text-rose-600 hover:bg-rose-100 transition-colors cursor-pointer"
                     title="ลบสลิปออก"
                   >
-                    <Trash2 className="h-3.5 w-3.5" />
-                    ลบสลิป
+                    <Trash2 className="h-3 w-3" />
+                    ลบ
                   </button>
                 </div>
               </div>
@@ -589,44 +578,44 @@ export const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
                 onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
                 onDragLeave={() => setDragActive(false)}
                 onDrop={handleDrop}
-                className={`relative rounded-xl border-2 border-dashed p-6 text-center transition-all ${
+                className={`relative rounded-xl border-2 border-dashed p-3 sm:p-4 text-center transition-all ${
                   dragActive 
-                    ? 'border-indigo-600 bg-indigo-50/50' 
-                    : 'border-slate-300 bg-slate-50 hover:border-indigo-400 hover:bg-indigo-50/30'
+                    ? 'border-amber-600 bg-amber-50/50' 
+                    : 'border-stone-300 bg-stone-50 hover:border-amber-400 hover:bg-amber-50/30'
                 }`}
               >
                 {isCompressing ? (
-                  <div className="py-4 text-indigo-600 text-sm font-bold animate-pulse">
+                  <div className="py-2 text-amber-800 text-xs font-bold animate-pulse">
                     กำลังบีบอัดและประมวลผลไฟล์สลิป...
                   </div>
                 ) : (
-                  <div className="flex flex-col items-center justify-center space-y-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-200">
-                      <Upload className="h-6 w-6" />
+                  <div className="flex flex-col items-center justify-center space-y-1.5">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-100 text-amber-800 border border-amber-200">
+                      <Upload className="h-4 w-4" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-slate-800">
-                        ลากไฟล์ภาพสลิปมาวางที่นี่ หรือคลิกเพื่ออัปโหลด
+                      <p className="text-xs font-bold text-stone-800">
+                        ลากไฟล์สลิปมาวางที่นี่ หรือคลิกเพื่ออัปโหลด
                       </p>
-                      <p className="text-xs text-slate-500 mt-1">
-                        รองรับ JPG, PNG, WebP (บีบอัดและจัดเก็บอย่างปลอดภัย ใช้งานออฟไลน์ได้)
+                      <p className="text-[10px] text-stone-500">
+                        รองรับ JPG, PNG, WebP (บีบอัดอัตโนมัติ)
                       </p>
                     </div>
-                    <div className="flex items-center gap-3 pt-1">
+                    <div className="flex items-center gap-2 pt-0.5">
                       <button
                         type="button"
                         onClick={() => fileInputRef.current?.click()}
-                        className="rounded-xl bg-slate-900 px-4 py-2 text-xs font-bold text-white hover:bg-slate-800 transition-colors shadow-xs"
+                        className="rounded-xl bg-stone-900 px-3 py-1.5 text-[11px] font-bold text-white hover:bg-stone-800 transition-colors shadow-2xs cursor-pointer"
                       >
-                        เลือกรูปภาพจากเครื่อง
+                        เลือกภาพจากเครื่อง
                       </button>
                       <button
                         type="button"
                         onClick={() => cameraInputRef.current?.click()}
-                        className="flex items-center gap-1.5 rounded-xl border border-slate-300 bg-white px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-100 transition-colors shadow-xs"
+                        className="flex items-center gap-1 rounded-xl border border-stone-300 bg-white px-3 py-1.5 text-[11px] font-bold text-stone-700 hover:bg-stone-100 transition-colors shadow-2xs cursor-pointer"
                       >
-                        <Camera className="h-3.5 w-3.5 text-indigo-600" />
-                        ถ่ายภาพด้วยกล้อง
+                        <Camera className="h-3 w-3 text-amber-800" />
+                        ถ่ายภาพ
                       </button>
                     </div>
                   </div>
@@ -653,24 +642,24 @@ export const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
           </div>
 
           {/* Submit & Cancel Buttons */}
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
+          <div className="flex items-center justify-end gap-2 pt-2.5 border-t border-stone-200">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-xl px-5 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+              className="rounded-xl px-3.5 py-1.5 text-xs font-semibold text-stone-600 hover:bg-stone-100 hover:text-stone-900 transition-colors cursor-pointer"
             >
               ยกเลิก
             </button>
             <button
               type="submit"
               disabled={isSubmitting || isCompressing}
-              className={`flex items-center gap-2 rounded-xl px-6 py-2.5 text-sm font-bold text-white transition-all shadow-xs ${
+              className={`flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-bold text-white transition-all shadow-2xs cursor-pointer ${
                 type === 'income'
                   ? 'bg-emerald-600 hover:bg-emerald-700'
                   : 'bg-rose-600 hover:bg-rose-700'
               } disabled:opacity-50`}
             >
-              {isSubmitting ? 'กำลังบันทึก...' : (initialData ? 'บันทึกการแก้ไขข้อมูล' : 'บันทึกรายการ')}
+              {isSubmitting ? 'กำลังบันทึก...' : (initialData ? 'บันทึกการแก้ไข' : 'บันทึกรายการ')}
             </button>
           </div>
         </form>
@@ -679,20 +668,20 @@ export const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
       {/* Slip Preview Zoom Modal */}
       {showSlipPreviewModal && slipUrl && (
         <div 
-          className="fixed inset-0 z-60 flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-xs"
+          className="fixed inset-0 z-60 flex items-center justify-center bg-stone-950/70 p-4 backdrop-blur-xs"
           onClick={() => setShowSlipPreviewModal(false)}
         >
           <div 
-            className="relative max-h-[90vh] max-w-2xl overflow-hidden rounded-2xl bg-white p-4 shadow-2xl border border-slate-200"
+            className="relative max-h-[90vh] max-w-2xl overflow-hidden rounded-2xl bg-white p-4 shadow-2xl border border-stone-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
-              <span className="font-bold text-slate-900 text-sm">
+            <div className="flex items-center justify-between pb-3 border-b border-stone-200">
+              <span className="font-bold text-stone-900 text-sm">
                 สลิป / ใบเสร็จหลักฐาน: {slipFileName || 'ภาพที่แนบ'}
               </span>
               <button
                 onClick={() => setShowSlipPreviewModal(false)}
-                className="rounded-lg p-1 text-slate-400 hover:text-slate-700"
+                className="rounded-lg p-1 text-stone-400 hover:text-stone-700 cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>

@@ -2,14 +2,14 @@
 
 @layer base {
   body {
-    background-color: #F8FAFC;
-    color: #0F172A;
+    background-color: #FAF8F5;
+    color: #1C1917;
     font-family: 'Prompt', 'Plus Jakarta Sans', 'Noto Sans Thai', system-ui, -apple-system, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Prompt', 'Plus Jakarta Sans', system-ui, sans-serif;
-    color: #0F172A;
+    color: #1C1917;
   }
 
   /* Smooth inputs and buttons */
@@ -18,20 +18,20 @@
   }
 }
 
-/* Custom scrollbar for modern slate UI */
+/* Custom scrollbar for warm cafe UI */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: #F5F2EB;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #D6CEBE;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #B8AC98;
 }
 
 /* Print Stylesheet for clean A4 and Thermal receipt printing */

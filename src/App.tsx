@@ -89,7 +89,7 @@ function CafeDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-indigo-600 selection:text-white">
+    <div className="min-h-screen bg-[#FAF8F5] text-stone-900 flex flex-col font-sans selection:bg-amber-800 selection:text-white">
       {/* Top Navbar */}
       <Navbar
         onOpenAddIncome={() => handleOpenAdd('income')}
@@ -101,7 +101,7 @@ function CafeDashboard() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6 sm:px-6 space-y-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-5 py-3.5 sm:py-5 space-y-3.5 sm:space-y-4">
         {/* Monthly Summary KPI Cards */}
         <MonthlySummary
           stats={stats}
@@ -118,36 +118,36 @@ function CafeDashboard() {
         {/* Quick Drop & Import Feature Banner */}
         <div 
           onClick={() => setIsImportOpen(true)}
-          className="group relative overflow-hidden rounded-2xl border-2 border-dashed border-emerald-300 bg-gradient-to-r from-emerald-50/90 via-teal-50/70 to-emerald-50/90 p-5 sm:p-6 cursor-pointer hover:border-emerald-500 hover:shadow-md transition-all"
+          className="group relative overflow-hidden rounded-xl border border-dashed border-emerald-300 bg-gradient-to-r from-emerald-50/90 via-teal-50/70 to-emerald-50/90 p-3 sm:p-4 cursor-pointer hover:border-emerald-500 hover:shadow-xs transition-all"
         >
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-3.5">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-md group-hover:scale-105 transition-transform">
-                <FileSpreadsheet className="h-6 w-6" />
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-xs group-hover:scale-105 transition-transform">
+                <FileSpreadsheet className="h-5 w-5" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h4 className="font-bold text-base text-slate-900">
-                    นำเข้าไฟล์สรุปผลรายรับ-รายจ่ายทันที (Instant Excel & CSV Summarizer)
+                  <h4 className="font-bold text-xs sm:text-sm text-stone-900">
+                    นำเข้าไฟล์สรุปผลรายรับ-รายจ่ายทันที (Instant Excel & CSV)
                   </h4>
-                  <span className="hidden sm:inline-flex rounded-full bg-emerald-200/80 text-emerald-900 font-extrabold text-[10px] px-2.5 py-0.5 border border-emerald-300">
-                    พร้อมใช้ทันที
+                  <span className="hidden sm:inline-flex rounded-full bg-emerald-200/80 text-emerald-900 font-extrabold text-[10px] px-2 py-0.5 border border-emerald-300">
+                    พร้อมใช้
                   </span>
                 </div>
-                <p className="text-xs text-slate-600 mt-0.5">
-                  คลิกที่นี่หรือลากไฟล์ Excel, CSV หรือกดวางข้อความ (Ctrl + V) เพื่อคำนวณยอดกำไร รายรับ-รายจ่าย และกราฟสถิติได้ใน 1 วินาที
+                <p className="text-[11px] text-stone-600 mt-0.5 line-clamp-1 sm:line-clamp-none">
+                  คลิกที่นี่หรือลากไฟล์ Excel, CSV หรือกดวางข้อความ (Ctrl + V) เพื่อคำนวณยอดกำไรและสถิติทันที
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 self-end sm:self-center">
+            <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
               <button
                 type="button"
-                className="flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 text-xs font-bold text-white shadow-xs group-hover:bg-emerald-700 transition-colors whitespace-nowrap"
+                className="flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-bold text-white shadow-2xs group-hover:bg-emerald-700 transition-colors whitespace-nowrap cursor-pointer"
               >
-                <Upload className="h-4 w-4" />
-                <span>เปิดระบบนำเข้าไฟล์</span>
-                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                <Upload className="h-3.5 w-3.5" />
+                <span>เปิดระบบนำเข้า</span>
+                <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
               </button>
             </div>
           </div>
@@ -169,14 +169,16 @@ function CafeDashboard() {
       </main>
 
       {/* Clean Modern Footer */}
-      <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-2.5">
-            <CollegeLogo size={28} customUrl={settings.logoUrl} />
-            <span className="font-bold text-slate-800">{settings.cafeName}</span>
-            <span>• {settings.cafeBranch || 'วิทยาลัยเทคนิควังน้ำเย็น'}</span>
+      <footer className="border-t border-stone-200/90 bg-white/95 py-3.5 text-center text-xs text-stone-500">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <CollegeLogo size={24} customUrl={settings.logoUrl} />
+            <span className="font-bold text-stone-800 text-xs">{settings.cafeName}</span>
+            {settings.cafeBranch && settings.cafeBranch !== settings.cafeName && (
+              <span className="text-[11px] text-stone-500">• {settings.cafeBranch}</span>
+            )}
           </div>
-          <div className="text-slate-400">
+          <div className="text-stone-400 text-[11px]">
             <span>ระบบบริหารจัดการรายรับ-รายจ่าย คาเฟ่</span>
           </div>
         </div>

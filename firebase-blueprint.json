@@ -1,0 +1,92 @@
+{
+  "entities": {
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Income or Expense record for the cafe",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string", "enum": ["income", "expense"] },
+        "amount": { "type": "number" },
+        "category": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "paymentMethod": { "type": "string", "enum": ["cash", "qr_promptpay", "transfer", "credit_card", "other"] },
+        "note": { "type": "string" },
+        "vendorOrCustomer": { "type": "string" },
+        "slipUrl": { "type": "string" },
+        "referenceNumber": { "type": "string" },
+        "userId": { "type": "string" },
+        "userDisplayName": { "type": "string" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["type", "amount", "category", "date", "paymentMethod"]
+    },
+    "CafeSettings": {
+      "title": "CafeSettings",
+      "description": "Store profile, branches, targets, and tax settings",
+      "type": "object",
+      "properties": {
+        "cafeName": { "type": "string" },
+        "cafeBranch": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "taxId": { "type": "string" },
+        "currencySymbol": { "type": "string" },
+        "monthlyRevenueTarget": { "type": "number" },
+        "monthlyExpenseBudget": { "type": "number" }
+      },
+      "required": ["cafeName"]
+    },
+    "StaffAccount": {
+      "title": "StaffAccount",
+      "description": "Staff login credentials and permissions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "password": { "type": "string" },
+        "role": { "type": "string", "enum": ["owner", "manager", "barista"] },
+        "description": { "type": "string" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["name", "phoneNumber", "role"]
+    },
+    "CafeUserProfile": {
+      "title": "CafeUserProfile",
+      "description": "Authenticated user profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["owner", "manager", "barista"] },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["uid", "displayName", "role"]
+    }
+  },
+  "firestore": {
+    "/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Financial income and expense records"
+    },
+    "/settings/{settingsId}": {
+      "schema": "CafeSettings",
+      "description": "Global cafe settings and configurations"
+    },
+    "/staff_accounts/{staffId}": {
+      "schema": "StaffAccount",
+      "description": "Registered staff and manager access credentials"
+    },
+    "/users/{userId}": {
+      "schema": "CafeUserProfile",
+      "description": "User profiles and roles"
+    }
+  }
+}

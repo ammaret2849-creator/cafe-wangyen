@@ -30,8 +30,8 @@ interface AnalyticsChartsProps {
 }
 
 const MODERN_PALETTE = [
-  '#2563EB', '#10B981', '#F59E0B', '#EC4899', '#8B5CF6', 
-  '#06B6D4', '#F97316', '#6366F1', '#14B8A6', '#84CC16'
+  '#92400E', '#059669', '#D97706', '#E11D48', '#78350F', 
+  '#0D9488', '#EA580C', '#451A03', '#16A34A', '#CA8A04'
 ];
 
 export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, settings }) => {
@@ -44,8 +44,8 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
       const expense = payload.find((p: any) => p.dataKey === 'expense')?.value || 0;
       const net = income - expense;
       return (
-        <div className="rounded-2xl border border-slate-200 bg-white p-3.5 shadow-xl text-xs">
-          <div className="font-bold text-slate-900 mb-2 border-b border-slate-100 pb-1">
+        <div className="rounded-2xl border border-stone-200 bg-white p-3.5 shadow-xl text-xs">
+          <div className="font-bold text-stone-900 mb-2 border-b border-stone-100 pb-1">
             วันที่ {label} {stats.month}
           </div>
           <div className="space-y-1.5">
@@ -61,7 +61,7 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
               </span>
               <span className="font-bold">{formatCurrency(expense, settings.currencySymbol)}</span>
             </div>
-            <div className="flex items-center justify-between gap-4 text-slate-900 border-t border-slate-100 pt-1.5 font-bold">
+            <div className="flex items-center justify-between gap-4 text-stone-900 border-t border-stone-100 pt-1.5 font-bold">
               <span>กำไรสุทธิ:</span>
               <span className={net >= 0 ? 'text-emerald-600' : 'text-rose-600'}>
                 {net >= 0 ? '+' : ''}{formatCurrency(net, settings.currencySymbol)}
@@ -79,13 +79,13 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
     if (active && payload && payload.length) {
       const data = payload[0];
       return (
-        <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-xl text-xs">
-          <div className="font-bold text-slate-900">{data.name}</div>
-          <div className="mt-1 text-indigo-600 font-bold">
+        <div className="rounded-xl border border-stone-200 bg-white p-3 shadow-xl text-xs">
+          <div className="font-bold text-stone-900">{data.name}</div>
+          <div className="mt-1 text-amber-800 font-bold">
             {formatCurrency(data.value, settings.currencySymbol)} ({data.payload.percentage?.toFixed(1)}%)
           </div>
           {data.payload.count && (
-            <div className="text-slate-500 text-[11px] mt-0.5">
+            <div className="text-stone-500 text-[11px] mt-0.5">
               จำนวน {data.payload.count} รายการ
             </div>
           )}
@@ -120,111 +120,111 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
   const overheadPercent = stats.totalIncome > 0 ? ((utilitiesExpense + rentExpense + salaryExpense) / stats.totalIncome) * 100 : 0;
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs space-y-5">
+    <div className="rounded-xl border border-stone-200/90 bg-white/95 p-3.5 sm:p-4 shadow-2xs space-y-3.5">
       {/* Chart Navigation Tabs */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-stone-100 pb-3">
         <div>
-          <h3 className="font-bold text-slate-900 flex items-center gap-2 text-base">
-            <BarChart3 className="h-5 w-5 text-indigo-600" />
+          <h3 className="font-bold text-stone-900 flex items-center gap-1.5 text-sm sm:text-base leading-tight">
+            <BarChart3 className="h-4 w-4 text-amber-800" />
             กราฟวิเคราะห์รายรับ-รายจ่าย & ประสิทธิภาพคาเฟ่
           </h3>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-[11px] text-stone-500 mt-0.5">
             แสดงแนวโน้มยอดขายรายวัน สัดส่วนต้นทุน และช่องทางการชำระเงิน
           </p>
         </div>
 
         {/* Tab Buttons */}
-        <div className="flex flex-wrap items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
+        <div className="flex flex-wrap items-center gap-1 bg-stone-100 p-0.5 rounded-lg border border-stone-200 text-xs">
           <button
             onClick={() => setActiveTab('daily')}
-            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+            className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-bold transition-all ${
               activeTab === 'daily'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-white text-stone-900 shadow-2xs'
+                : 'text-stone-600 hover:text-stone-900'
             }`}
           >
-            <TrendingUp className="h-3.5 w-3.5 text-emerald-600" />
-            รายวัน (Daily Trend)
+            <TrendingUp className="h-3 w-3 text-emerald-600" />
+            รายวัน
           </button>
           <button
             onClick={() => setActiveTab('categories')}
-            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+            className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-bold transition-all ${
               activeTab === 'categories'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-white text-stone-900 shadow-2xs'
+                : 'text-stone-600 hover:text-stone-900'
             }`}
           >
-            <PieIcon className="h-3.5 w-3.5 text-indigo-600" />
-            หมวดหมู่ (Categories)
+            <PieIcon className="h-3 w-3 text-amber-700" />
+            หมวดหมู่
           </button>
           <button
             onClick={() => setActiveTab('cost_structure')}
-            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+            className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-bold transition-all ${
               activeTab === 'cost_structure'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-white text-stone-900 shadow-2xs'
+                : 'text-stone-600 hover:text-stone-900'
             }`}
           >
-            <Layers className="h-3.5 w-3.5 text-amber-600" />
-            โครงสร้างต้นทุน (Cost %)
+            <Layers className="h-3 w-3 text-amber-800" />
+            โครงสร้างต้นทุน
           </button>
           <button
             onClick={() => setActiveTab('payments')}
-            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+            className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-bold transition-all ${
               activeTab === 'payments'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-white text-stone-900 shadow-2xs'
+                : 'text-stone-600 hover:text-stone-900'
             }`}
           >
-            <CreditCard className="h-3.5 w-3.5 text-sky-600" />
-            วิธีชำระเงิน (Payments)
+            <CreditCard className="h-3 w-3 text-stone-700" />
+            วิธีชำระเงิน
           </button>
         </div>
       </div>
 
       {/* TAB 1: DAILY TREND CHART */}
       {activeTab === 'daily' && (
-        <div className="space-y-4">
-          <div className="h-[320px] w-full">
+        <div className="space-y-3">
+          <div className="h-[240px] sm:h-[270px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart
                 data={stats.dailyData}
-                margin={{ top: 10, right: 10, left: -15, bottom: 0 }}
+                margin={{ top: 5, right: 5, left: -20, bottom: 0 }}
               >
                 <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" vertical={false} />
                 <XAxis 
                   dataKey="day" 
                   stroke="#94A3B8" 
-                  tick={{ fontSize: 11, fill: '#475569' }}
+                  tick={{ fontSize: 10, fill: '#475569' }}
                   tickLine={false}
                 />
                 <YAxis 
                   stroke="#94A3B8" 
-                  tick={{ fontSize: 11, fill: '#475569' }}
+                  tick={{ fontSize: 10, fill: '#475569' }}
                   tickFormatter={(val) => `฿${val >= 1000 ? (val/1000).toFixed(0) + 'k' : val}`}
                   tickLine={false}
                 />
                 <Tooltip content={<CustomDailyTooltip />} />
                 <Legend 
                   verticalAlign="top" 
-                  height={36} 
+                  height={28} 
                   formatter={(val) => {
                     if (val === 'income') return 'รายรับ (฿)';
                     if (val === 'expense') return 'รายจ่าย (฿)';
                     if (val === 'net') return 'กำไรสุทธิ (฿)';
                     return val;
                   }}
-                  wrapperStyle={{ fontSize: '12px', fontWeight: 600 }}
+                  wrapperStyle={{ fontSize: '11px', fontWeight: 600 }}
                 />
-                <Bar dataKey="income" name="income" fill="#10B981" radius={[4, 4, 0, 0]} maxBarSize={20} />
-                <Bar dataKey="expense" name="expense" fill="#F43F5E" radius={[4, 4, 0, 0]} maxBarSize={20} />
-                <Line type="monotone" dataKey="net" name="net" stroke="#3B82F6" strokeWidth={2.5} dot={{ r: 3, fill: '#3B82F6' }} />
+                <Bar dataKey="income" name="income" fill="#10B981" radius={[3, 3, 0, 0]} maxBarSize={16} />
+                <Bar dataKey="expense" name="expense" fill="#F43F5E" radius={[3, 3, 0, 0]} maxBarSize={16} />
+                <Line type="monotone" dataKey="net" name="net" stroke="#3B82F6" strokeWidth={2} dot={{ r: 2.5, fill: '#3B82F6' }} />
               </ComposedChart>
             </ResponsiveContainer>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px] sm:text-xs bg-slate-50 p-2.5 sm:p-3 rounded-lg border border-slate-200">
             <div className="text-slate-700">
-              วันที่มีรายรับสูงสุด: <span className="text-emerald-700 font-bold">
+              วันรับสูงสุด: <span className="text-emerald-700 font-bold">
                 {(() => {
                   const maxInc = [...stats.dailyData].sort((a, b) => b.income - a.income)[0];
                   return maxInc && maxInc.income > 0 ? `วันที่ ${maxInc.day} (${formatCurrency(maxInc.income, settings.currencySymbol)})` : '-';
@@ -232,7 +232,7 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
               </span>
             </div>
             <div className="text-slate-700">
-              วันที่มีรายจ่ายสูงสุด: <span className="text-rose-700 font-bold">
+              วันจ่ายสูงสุด: <span className="text-rose-700 font-bold">
                 {(() => {
                   const maxExp = [...stats.dailyData].sort((a, b) => b.expense - a.expense)[0];
                   return maxExp && maxExp.expense > 0 ? `วันที่ ${maxExp.day} (${formatCurrency(maxExp.expense, settings.currencySymbol)})` : '-';
@@ -240,7 +240,7 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
               </span>
             </div>
             <div className="text-slate-700">
-              วันที่มีกำไรสุทธิสูงสุด: <span className="text-indigo-700 font-bold">
+              วันกำไรสูงสุด: <span className="text-indigo-700 font-bold">
                 {(() => {
                   const maxNet = [...stats.dailyData].sort((a, b) => b.net - a.net)[0];
                   return maxNet && maxNet.net > 0 ? `วันที่ ${maxNet.day} (${formatCurrency(maxNet.net, settings.currencySymbol)})` : '-';
@@ -253,22 +253,22 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
 
       {/* TAB 2: CATEGORY BREAKDOWN CHARTS */}
       {activeTab === 'categories' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3.5">
           {/* Income Categories */}
-          <div className="rounded-xl bg-slate-50 p-4 border border-slate-200">
-            <div className="flex items-center justify-between mb-3">
-              <h4 className="text-sm font-bold text-emerald-800 flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
+          <div className="rounded-lg bg-slate-50 p-3 border border-slate-200">
+            <div className="flex items-center justify-between mb-2">
+              <h4 className="text-xs font-bold text-emerald-800 flex items-center gap-1">
+                <span className="h-2 w-2 rounded-full bg-emerald-500" />
                 สัดส่วนรายรับตามหมวดหมู่
               </h4>
-              <span className="text-xs font-semibold text-slate-600">
+              <span className="text-[11px] font-semibold text-slate-600">
                 รวม {formatCurrency(stats.totalIncome, settings.currencySymbol)}
               </span>
             </div>
 
             {stats.incomeByCategory.length > 0 ? (
-              <div className="flex flex-col sm:flex-row items-center gap-4">
-                <div className="h-[200px] w-[200px] shrink-0">
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <div className="h-[160px] w-[160px] shrink-0">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie
@@ -277,8 +277,8 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
                         nameKey="category"
                         cx="50%"
                         cy="50%"
-                        innerRadius={50}
-                        outerRadius={80}
+                        innerRadius={40}
+                        outerRadius={65}
                         paddingAngle={3}
                       >
                         {stats.incomeByCategory.map((_, index) => (
@@ -289,18 +289,18 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="flex-1 space-y-2 w-full text-xs">
+                <div className="flex-1 space-y-1.5 w-full text-[11px]">
                   {stats.incomeByCategory.map((cat, idx) => (
                     <div key={idx} className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 truncate">
+                      <div className="flex items-center gap-1.5 truncate">
                         <span 
-                          className="h-2.5 w-2.5 rounded-full shrink-0" 
+                          className="h-2 w-2 rounded-full shrink-0" 
                           style={{ backgroundColor: MODERN_PALETTE[idx % MODERN_PALETTE.length] }} 
                         />
                         <span className="text-slate-800 font-medium truncate">{cat.category}</span>
                       </div>
                       <div className="text-right shrink-0">
-                        <span className="font-bold text-slate-900 mr-2">{formatCurrency(cat.amount, settings.currencySymbol)}</span>
+                        <span className="font-bold text-slate-900 mr-1.5">{formatCurrency(cat.amount, settings.currencySymbol)}</span>
                         <span className="text-slate-500 font-medium">({cat.percentage.toFixed(1)}%)</span>
                       </div>
                     </div>
@@ -308,27 +308,27 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
                 </div>
               </div>
             ) : (
-              <div className="py-12 text-center text-xs text-slate-400">
+              <div className="py-8 text-center text-xs text-slate-400">
                 ยังไม่มีข้อมูลรายรับในเดือนนี้
               </div>
             )}
           </div>
 
           {/* Expense Categories */}
-          <div className="rounded-xl bg-slate-50 p-4 border border-slate-200">
-            <div className="flex items-center justify-between mb-3">
-              <h4 className="text-sm font-bold text-rose-800 flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-rose-500" />
+          <div className="rounded-lg bg-slate-50 p-3 border border-slate-200">
+            <div className="flex items-center justify-between mb-2">
+              <h4 className="text-xs font-bold text-rose-800 flex items-center gap-1">
+                <span className="h-2 w-2 rounded-full bg-rose-500" />
                 สัดส่วนรายจ่ายตามหมวดหมู่
               </h4>
-              <span className="text-xs font-semibold text-slate-600">
+              <span className="text-[11px] font-semibold text-slate-600">
                 รวม {formatCurrency(stats.totalExpense, settings.currencySymbol)}
               </span>
             </div>
 
             {stats.expenseByCategory.length > 0 ? (
-              <div className="flex flex-col sm:flex-row items-center gap-4">
-                <div className="h-[200px] w-[200px] shrink-0">
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <div className="h-[160px] w-[160px] shrink-0">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie
@@ -337,8 +337,8 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
                         nameKey="category"
                         cx="50%"
                         cy="50%"
-                        innerRadius={50}
-                        outerRadius={80}
+                        innerRadius={40}
+                        outerRadius={65}
                         paddingAngle={3}
                       >
                         {stats.expenseByCategory.map((_, index) => (
@@ -349,18 +349,18 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="flex-1 space-y-2 w-full text-xs">
+                <div className="flex-1 space-y-1.5 w-full text-[11px]">
                   {stats.expenseByCategory.map((cat, idx) => (
                     <div key={idx} className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 truncate">
+                      <div className="flex items-center gap-1.5 truncate">
                         <span 
-                          className="h-2.5 w-2.5 rounded-full shrink-0" 
+                          className="h-2 w-2 rounded-full shrink-0" 
                           style={{ backgroundColor: MODERN_PALETTE[(idx + 3) % MODERN_PALETTE.length] }} 
                         />
                         <span className="text-slate-800 font-medium truncate">{cat.category}</span>
                       </div>
                       <div className="text-right shrink-0">
-                        <span className="font-bold text-slate-900 mr-2">{formatCurrency(cat.amount, settings.currencySymbol)}</span>
+                        <span className="font-bold text-slate-900 mr-1.5">{formatCurrency(cat.amount, settings.currencySymbol)}</span>
                         <span className="text-slate-500 font-medium">({cat.percentage.toFixed(1)}%)</span>
                       </div>
                     </div>
@@ -368,7 +368,7 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
                 </div>
               </div>
             ) : (
-              <div className="py-12 text-center text-xs text-slate-400">
+              <div className="py-8 text-center text-xs text-slate-400">
                 ยังไม่มีข้อมูลรายจ่ายในเดือนนี้
               </div>
             )}
@@ -378,58 +378,58 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
 
       {/* TAB 3: CAFE COST STRUCTURE & MARGINS */}
       {activeTab === 'cost_structure' && (
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="rounded-xl bg-amber-50/70 p-4 border border-amber-200">
-              <div className="text-xs font-bold text-amber-800">ต้นทุนวัตถุดิบ & บรรจุภัณฑ์ (COGS)</div>
-              <div className="text-2xl font-extrabold text-slate-900 mt-1">
+        <div className="space-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <div className="rounded-lg bg-amber-50/70 p-3 border border-amber-200">
+              <div className="text-[11px] font-bold text-amber-800">ต้นทุนวัตถุดิบ (COGS)</div>
+              <div className="text-xl font-extrabold text-slate-900 mt-0.5">
                 {cogsPercent.toFixed(1)}%
               </div>
-              <div className="text-xs text-slate-600 mt-1">
-                ยอดเงิน: {formatCurrency(rawMaterialExpense + packagingExpense, settings.currencySymbol)}
+              <div className="text-[11px] text-slate-600 mt-0.5">
+                ยอด: {formatCurrency(rawMaterialExpense + packagingExpense, settings.currencySymbol)}
               </div>
-              <div className="mt-2 text-[11px] text-amber-700 font-medium">
-                (เกณฑ์มาตรฐานร้านกาแฟ: 30% - 35%)
+              <div className="mt-1 text-[10px] text-amber-700 font-medium">
+                (มาตรฐานคาเฟ่: 30% - 35%)
               </div>
             </div>
 
-            <div className="rounded-xl bg-sky-50/70 p-4 border border-sky-200">
-              <div className="text-xs font-bold text-sky-800">ค่าดำเนินการ (เช่า/น้ำไฟ/ค่าแรง)</div>
-              <div className="text-2xl font-extrabold text-slate-900 mt-1">
+            <div className="rounded-lg bg-sky-50/70 p-3 border border-sky-200">
+              <div className="text-[11px] font-bold text-sky-800">ค่าดำเนินการ (Overhead)</div>
+              <div className="text-xl font-extrabold text-slate-900 mt-0.5">
                 {overheadPercent.toFixed(1)}%
               </div>
-              <div className="text-xs text-slate-600 mt-1">
-                ยอดเงิน: {formatCurrency(utilitiesExpense + rentExpense + salaryExpense, settings.currencySymbol)}
+              <div className="text-[11px] text-slate-600 mt-0.5">
+                ยอด: {formatCurrency(utilitiesExpense + rentExpense + salaryExpense, settings.currencySymbol)}
               </div>
-              <div className="mt-2 text-[11px] text-sky-700 font-medium">
-                (ค่าเช่า + น้ำไฟ + เงินเดือนพนักงาน)
+              <div className="mt-1 text-[10px] text-sky-700 font-medium">
+                (เช่า + น้ำไฟ + แรงงาน)
               </div>
             </div>
 
-            <div className="rounded-xl bg-emerald-50/70 p-4 border border-emerald-200">
-              <div className="text-xs font-bold text-emerald-800">อัตรากำไรสุทธิคงเหลือ (Net Margin)</div>
-              <div className={`text-2xl font-extrabold mt-1 ${stats.profitMargin >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+            <div className="rounded-lg bg-emerald-50/70 p-3 border border-emerald-200">
+              <div className="text-[11px] font-bold text-emerald-800">กำไรสุทธิ (Net Margin)</div>
+              <div className={`text-xl font-extrabold mt-0.5 ${stats.profitMargin >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                 {stats.profitMargin.toFixed(1)}%
               </div>
-              <div className="text-xs text-slate-600 mt-1">
-                กำไรสุทธิ: {formatCurrency(stats.netProfit, settings.currencySymbol)}
+              <div className="text-[11px] text-slate-600 mt-0.5">
+                กำไร: {formatCurrency(stats.netProfit, settings.currencySymbol)}
               </div>
-              <div className="mt-2 text-[11px] text-emerald-700 font-medium">
-                (หลังหักค่าใช้จ่ายทั้งหมดในร้าน)
+              <div className="mt-1 text-[10px] text-emerald-700 font-medium">
+                (หลังหักค่าใช้จ่ายทั้งหมด)
               </div>
             </div>
           </div>
 
           {/* Breakdown progress meter */}
-          <div className="rounded-xl bg-slate-50 p-4 border border-slate-200 space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700">
-              สัดส่วนการกระจายตัวของรายรับ (100% Revenue Distribution)
+          <div className="rounded-lg bg-slate-50 p-3 border border-slate-200 space-y-2">
+            <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-700">
+              สัดส่วนการกระจายตัวของรายรับ (Revenue Distribution)
             </h4>
-            <div className="h-6 w-full overflow-hidden rounded-xl bg-slate-200 flex">
+            <div className="h-5 w-full overflow-hidden rounded-lg bg-slate-200 flex">
               {cogsPercent > 0 && (
                 <div 
                   style={{ width: `${Math.min(cogsPercent, 100)}%` }} 
-                  className="bg-amber-500 h-full flex items-center justify-center text-[10px] font-bold text-white overflow-hidden px-1"
+                  className="bg-amber-500 h-full flex items-center justify-center text-[9px] font-bold text-white overflow-hidden px-1"
                   title={`วัตถุดิบ & แก้ว ${cogsPercent.toFixed(1)}%`}
                 >
                   COGS {cogsPercent.toFixed(0)}%
@@ -438,7 +438,7 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
               {overheadPercent > 0 && (
                 <div 
                   style={{ width: `${Math.min(overheadPercent, 100 - cogsPercent)}%` }} 
-                  className="bg-sky-500 h-full flex items-center justify-center text-[10px] font-bold text-white overflow-hidden px-1"
+                  className="bg-sky-500 h-full flex items-center justify-center text-[9px] font-bold text-white overflow-hidden px-1"
                   title={`ค่าดำเนินงาน ${overheadPercent.toFixed(1)}%`}
                 >
                   Overhead {overheadPercent.toFixed(0)}%
@@ -447,7 +447,7 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
               {stats.profitMargin > 0 && (
                 <div 
                   style={{ width: `${Math.min(stats.profitMargin, 100 - cogsPercent - overheadPercent)}%` }} 
-                  className="bg-emerald-600 h-full flex items-center justify-center text-[10px] font-bold text-white overflow-hidden px-1"
+                  className="bg-emerald-600 h-full flex items-center justify-center text-[9px] font-bold text-white overflow-hidden px-1"
                   title={`กำไรสุทธิ ${stats.profitMargin.toFixed(1)}%`}
                 >
                   Profit {stats.profitMargin.toFixed(0)}%
@@ -460,38 +460,38 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
 
       {/* TAB 4: PAYMENT METHODS */}
       {activeTab === 'payments' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="h-[250px] w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="h-[210px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={stats.paymentMethodStats}
-                margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
+                margin={{ top: 5, right: 5, left: -15, bottom: 0 }}
               >
                 <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" vertical={false} />
-                <XAxis dataKey="name" stroke="#94A3B8" tick={{ fontSize: 11, fill: '#475569' }} tickLine={false} />
-                <YAxis stroke="#94A3B8" tick={{ fontSize: 11, fill: '#475569' }} tickFormatter={(v) => `฿${v >= 1000 ? (v/1000).toFixed(0) + 'k' : v}`} tickLine={false} />
+                <XAxis dataKey="name" stroke="#94A3B8" tick={{ fontSize: 10, fill: '#475569' }} tickLine={false} />
+                <YAxis stroke="#94A3B8" tick={{ fontSize: 10, fill: '#475569' }} tickFormatter={(v) => `฿${v >= 1000 ? (v/1000).toFixed(0) + 'k' : v}`} tickLine={false} />
                 <Tooltip 
                   formatter={(value: any) => [formatCurrency(Number(value), settings.currencySymbol), 'ยอดเงินรวม']}
-                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#E2E8F0', borderRadius: '12px', fontSize: '12px', color: '#0F172A' }}
+                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#E2E8F0', borderRadius: '8px', fontSize: '11px', color: '#0F172A' }}
                 />
-                <Bar dataKey="amount" fill="#3B82F6" radius={[6, 6, 0, 0]} maxBarSize={40} />
+                <Bar dataKey="amount" fill="#3B82F6" radius={[4, 4, 0, 0]} maxBarSize={30} />
               </BarChart>
             </ResponsiveContainer>
           </div>
 
-          <div className="space-y-2.5">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700">
+          <div className="space-y-1.5">
+            <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-700">
               รายละเอียดแต่ละช่องทางชำระเงิน
             </h4>
             {stats.paymentMethodStats.map((p, idx) => (
-              <div key={idx} className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs">
-                <div className="flex items-center gap-2">
-                  <CreditCard className="h-4 w-4 text-indigo-600" />
-                  <span className="font-bold text-slate-800">{p.name}</span>
+              <div key={idx} className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200 text-xs">
+                <div className="flex items-center gap-1.5">
+                  <CreditCard className="h-3.5 w-3.5 text-indigo-600" />
+                  <span className="font-bold text-slate-800 text-xs">{p.name}</span>
                 </div>
                 <div className="text-right">
-                  <div className="font-extrabold text-slate-900">{formatCurrency(p.amount, settings.currencySymbol)}</div>
-                  <div className="text-[11px] text-slate-500 font-medium">{p.count} รายการ</div>
+                  <div className="font-extrabold text-slate-900 text-xs">{formatCurrency(p.amount, settings.currencySymbol)}</div>
+                  <div className="text-[10px] text-slate-500 font-medium">{p.count} รายการ</div>
                 </div>
               </div>
             ))}
