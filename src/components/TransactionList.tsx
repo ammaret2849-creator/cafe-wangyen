@@ -195,22 +195,22 @@ export const TransactionList: React.FC<TransactionListProps> = ({
   );
 
   return (
-    <div className="rounded-xl border border-stone-200/90 bg-white/95 p-3.5 sm:p-4 shadow-2xs space-y-3">
+    <div className="rounded-xl border border-slate-200 bg-white p-3.5 sm:p-4 shadow-2xs space-y-3">
       {/* Header & Action Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-stone-100 pb-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-slate-100 pb-3">
         <div>
           <div className="flex items-center gap-1.5">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-50 text-amber-800 border border-amber-200">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-200">
               <Receipt className="h-3.5 w-3.5" />
             </div>
-            <h3 className="font-bold text-stone-900 text-sm sm:text-base">
-              รายการบันทึกและสรุปรายรับรายจ่าย
+            <h3 className="font-bold text-slate-900 text-sm sm:text-base">
+              รายการบันทึกรายรับ-รายจ่าย
             </h3>
-            <span className="rounded-full bg-stone-100 px-2 py-0.5 text-[11px] text-stone-700 font-bold border border-stone-200">
+            <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] text-slate-700 font-bold border border-slate-200">
               {transactions.length} รายการ
             </span>
           </div>
-          <p className="text-[11px] text-stone-500 mt-0.5">
+          <p className="text-[11px] text-slate-500 mt-0.5">
             {isFilteredActive 
               ? `ช่วงเวลาที่ค้นหา: ${formatDateRangeThai(filter.startDate, filter.endDate, filter.startTime, filter.endTime)}` 
               : 'ค้นหาวันเวลา แก้ไขรายละเอียดรายการ และสั่งพิมพ์รายงานพร้อม QR Code สลิป'}
@@ -222,7 +222,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
           {onOpenImport && (
             <button
               onClick={onOpenImport}
-              className="flex items-center gap-1 rounded-lg border border-emerald-300/80 bg-emerald-50 px-2.5 py-1.5 text-xs font-bold text-emerald-800 hover:bg-emerald-100 hover:text-emerald-900 transition-colors shadow-2xs"
+              className="flex items-center gap-1 rounded-lg border border-emerald-300 bg-emerald-50 px-2.5 py-1.5 text-xs font-bold text-emerald-800 hover:bg-emerald-100 hover:text-emerald-900 transition-colors shadow-2xs"
               title="นำเข้าไฟล์ Excel / CSV หรือวางไฟล์เพื่อสรุปผลทันที"
             >
               <Upload className="h-3 w-3 text-emerald-600" />
@@ -233,20 +233,20 @@ export const TransactionList: React.FC<TransactionListProps> = ({
           {onOpenPrint && (
             <button
               onClick={onOpenPrint}
-              className="flex items-center gap-1 rounded-lg border border-stone-200 bg-white px-2.5 py-1.5 text-xs font-bold text-stone-700 hover:bg-stone-100 hover:text-stone-900 transition-colors shadow-2xs"
+              className="flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-bold text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors shadow-2xs"
               title="สั่งพิมพ์รายงานตามช่วงวันเวลาที่ค้นหา"
             >
-              <Printer className="h-3 w-3 text-stone-600" />
+              <Printer className="h-3 w-3 text-slate-600" />
               <span>พิมพ์</span>
             </button>
           )}
 
           <button
             onClick={handleExportCSV}
-            className="flex items-center gap-1 rounded-lg border border-stone-200 bg-stone-50 px-2.5 py-1.5 text-xs font-semibold text-stone-700 hover:bg-stone-100 hover:text-stone-900 transition-colors shadow-2xs"
+            className="flex items-center gap-1 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors shadow-2xs"
             title="ดาวน์โหลดไฟล์ CSV"
           >
-            <FileSpreadsheet className="h-3 w-3 text-stone-600" />
+            <FileSpreadsheet className="h-3 w-3 text-slate-600" />
             <span>CSV</span>
           </button>
 
@@ -269,12 +269,12 @@ export const TransactionList: React.FC<TransactionListProps> = ({
       </div>
 
       {/* Date-Time Search & Filtering Section */}
-      <div className="rounded-lg border border-stone-200 bg-stone-50/80 p-2.5 sm:p-3 space-y-2.5">
+      <div className="rounded-lg border border-slate-200 bg-slate-50 p-2.5 sm:p-3 space-y-2.5">
         {/* Quick Date Presets */}
         <div className="flex flex-wrap items-center justify-between gap-1.5 text-xs">
           <div className="flex flex-wrap items-center gap-1">
-            <span className="font-bold text-stone-700 flex items-center gap-1 mr-0.5 text-xs">
-              <Calendar className="h-3 w-3 text-amber-700" />
+            <span className="font-bold text-slate-700 flex items-center gap-1 mr-0.5 text-xs">
+              <Calendar className="h-3 w-3 text-indigo-600" />
               ช่วงเวลา:
             </span>
             <button
@@ -282,8 +282,8 @@ export const TransactionList: React.FC<TransactionListProps> = ({
               onClick={() => handleApplyDatePreset('all')}
               className={`rounded-md px-2 py-0.5 text-xs font-semibold transition-all ${
                 (!filter.startDate && !filter.endDate)
-                  ? 'bg-stone-900 text-white shadow-2xs'
-                  : 'bg-white text-stone-700 border border-stone-200 hover:bg-stone-100 hover:text-stone-900'
+                  ? 'bg-slate-900 text-white shadow-2xs'
+                  : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
               ทั้งหมด
@@ -293,8 +293,8 @@ export const TransactionList: React.FC<TransactionListProps> = ({
               onClick={() => handleApplyDatePreset('today')}
               className={`rounded-md px-2 py-0.5 text-xs font-semibold transition-all ${
                 filter.datePreset === 'today' || (filter.startDate === getTodayDateString() && filter.endDate === getTodayDateString())
-                  ? 'bg-stone-900 text-white shadow-2xs'
-                  : 'bg-white text-stone-700 border border-stone-200 hover:bg-stone-100 hover:text-stone-900'
+                  ? 'bg-slate-900 text-white shadow-2xs'
+                  : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
               วันนี้
@@ -304,8 +304,8 @@ export const TransactionList: React.FC<TransactionListProps> = ({
               onClick={() => handleApplyDatePreset('yesterday')}
               className={`rounded-md px-2 py-0.5 text-xs font-semibold transition-all ${
                 filter.datePreset === 'yesterday'
-                  ? 'bg-stone-900 text-white shadow-2xs'
-                  : 'bg-white text-stone-700 border border-stone-200 hover:bg-stone-100 hover:text-stone-900'
+                  ? 'bg-slate-900 text-white shadow-2xs'
+                  : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
               เมื่อวาน
@@ -315,8 +315,8 @@ export const TransactionList: React.FC<TransactionListProps> = ({
               onClick={() => handleApplyDatePreset('last_7_days')}
               className={`rounded-md px-2 py-0.5 text-xs font-semibold transition-all ${
                 filter.datePreset === 'last_7_days'
-                  ? 'bg-stone-900 text-white shadow-2xs'
-                  : 'bg-white text-stone-700 border border-stone-200 hover:bg-stone-100 hover:text-stone-900'
+                  ? 'bg-slate-900 text-white shadow-2xs'
+                  : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
               7 วันล่าสุด
@@ -326,8 +326,8 @@ export const TransactionList: React.FC<TransactionListProps> = ({
               onClick={() => handleApplyDatePreset('this_month')}
               className={`rounded-md px-2 py-0.5 text-xs font-semibold transition-all ${
                 filter.datePreset === 'this_month'
-                  ? 'bg-stone-900 text-white shadow-2xs'
-                  : 'bg-white text-stone-700 border border-stone-200 hover:bg-stone-100 hover:text-stone-900'
+                  ? 'bg-slate-900 text-white shadow-2xs'
+                  : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
               เดือนนี้
@@ -337,7 +337,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
           <button
             type="button"
             onClick={() => setShowAdvancedFilter(!showAdvancedFilter)}
-            className="flex items-center gap-1 text-amber-800 font-bold hover:text-amber-900 transition-colors text-xs cursor-pointer"
+            className="flex items-center gap-1 text-indigo-600 font-bold hover:text-indigo-800 transition-colors text-xs"
           >
             <Filter className="h-3 w-3" />
             <span>{showAdvancedFilter ? 'ย่อตัวกรอง' : 'ตัวกรองละเอียด'}</span>
@@ -349,13 +349,13 @@ export const TransactionList: React.FC<TransactionListProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 text-xs">
           {/* Keyword Search */}
           <div className="relative lg:col-span-2">
-            <Search className="pointer-events-none absolute left-2.5 top-2 h-3.5 w-3.5 text-stone-400" />
+            <Search className="pointer-events-none absolute left-2.5 top-2 h-3.5 w-3.5 text-slate-400" />
             <input
               type="text"
               placeholder="ค้นหารายการ, คู่ค้า, โน้ต..."
               value={filter.search}
               onChange={(e) => setFilter(prev => ({ ...prev, search: e.target.value }))}
-              className="w-full rounded-lg border border-stone-200 bg-white py-1.5 pl-8 pr-2.5 text-xs text-stone-900 placeholder-stone-400 focus:border-amber-700 focus:ring-1 focus:ring-amber-700 focus:outline-none"
+              className="w-full rounded-lg border border-slate-200 bg-white py-1.5 pl-8 pr-2.5 text-xs text-slate-900 placeholder-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
             />
           </div>
 
@@ -364,7 +364,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
             <select
               value={filter.type}
               onChange={(e) => setFilter(prev => ({ ...prev, type: e.target.value as any }))}
-              className="w-full rounded-lg border border-stone-200 bg-white py-1.5 px-2 text-xs text-stone-800 font-medium focus:border-amber-700 focus:outline-none"
+              className="w-full rounded-lg border border-slate-200 bg-white py-1.5 px-2 text-xs text-slate-800 font-medium focus:border-indigo-500 focus:outline-none"
             >
               <option value="all">ทุกประเภท (รับ + จ่าย)</option>
               <option value="income">เฉพาะรายรับ (+)</option>
@@ -377,7 +377,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
             <select
               value={filter.paymentMethod}
               onChange={(e) => setFilter(prev => ({ ...prev, paymentMethod: e.target.value }))}
-              className="w-full rounded-lg border border-stone-200 bg-white py-1.5 px-2 text-xs text-stone-800 font-medium focus:border-amber-700 focus:outline-none"
+              className="w-full rounded-lg border border-slate-200 bg-white py-1.5 px-2 text-xs text-slate-800 font-medium focus:border-indigo-500 focus:outline-none"
             >
               <option value="all">ทุกวิธีชำระเงิน</option>
               <option value="qr_promptpay">QR / พร้อมเพย์</option>
@@ -390,12 +390,12 @@ export const TransactionList: React.FC<TransactionListProps> = ({
 
           {/* Slip Only Toggle */}
           <div className="flex items-center justify-between sm:justify-start">
-            <label className="flex items-center gap-1.5 cursor-pointer text-stone-700 hover:text-stone-900 px-1 py-1">
+            <label className="flex items-center gap-1.5 cursor-pointer text-slate-700 hover:text-slate-900 px-1 py-1">
               <input
                 type="checkbox"
                 checked={!!filter.hasSlipOnly}
                 onChange={(e) => setFilter(prev => ({ ...prev, hasSlipOnly: e.target.checked }))}
-                className="rounded border-stone-300 text-amber-800 focus:ring-amber-700 h-3.5 w-3.5"
+                className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 h-3.5 w-3.5"
               />
               <span className="truncate font-semibold text-xs">เฉพาะมีสลิป</span>
             </label>
@@ -404,7 +404,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
               <button
                 type="button"
                 onClick={handleResetFilters}
-                className="flex items-center gap-0.5 text-[11px] text-stone-500 hover:text-rose-600 ml-auto font-medium cursor-pointer"
+                className="flex items-center gap-0.5 text-[11px] text-slate-500 hover:text-rose-600 ml-auto font-medium"
                 title="ล้างตัวกรองทั้งหมด"
               >
                 <RotateCcw className="h-2.5 w-2.5" />
@@ -416,65 +416,65 @@ export const TransactionList: React.FC<TransactionListProps> = ({
 
         {/* Detailed Date Range & Time Filter (Expandable) */}
         {showAdvancedFilter && (
-          <div className="pt-2 border-t border-stone-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs">
+          <div className="pt-2 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs">
             {/* Start Date */}
             <div className="space-y-0.5">
-              <label className="text-[10px] font-bold text-stone-700 flex items-center gap-1">
-                <Calendar className="h-2.5 w-2.5 text-amber-700" /> เริ่มต้น:
+              <label className="text-[10px] font-bold text-slate-700 flex items-center gap-1">
+                <Calendar className="h-2.5 w-2.5 text-indigo-600" /> เริ่มต้น:
               </label>
               <input
                 type="date"
                 value={filter.startDate || ''}
                 onChange={(e) => setFilter(prev => ({ ...prev, startDate: e.target.value, datePreset: 'custom' }))}
-                className="w-full rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs text-stone-900 focus:border-amber-700 focus:outline-none"
+                className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none"
               />
             </div>
 
             {/* End Date */}
             <div className="space-y-0.5">
-              <label className="text-[10px] font-bold text-stone-700 flex items-center gap-1">
-                <Calendar className="h-2.5 w-2.5 text-amber-700" /> สิ้นสุด:
+              <label className="text-[10px] font-bold text-slate-700 flex items-center gap-1">
+                <Calendar className="h-2.5 w-2.5 text-indigo-600" /> สิ้นสุด:
               </label>
               <input
                 type="date"
                 value={filter.endDate || ''}
                 onChange={(e) => setFilter(prev => ({ ...prev, endDate: e.target.value, datePreset: 'custom' }))}
-                className="w-full rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs text-stone-900 focus:border-amber-700 focus:outline-none"
+                className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none"
               />
             </div>
 
             {/* Start Time */}
             <div className="space-y-0.5">
-              <label className="text-[10px] font-bold text-stone-700 flex items-center gap-1">
-                <Clock className="h-2.5 w-2.5 text-amber-700" /> เวลาเริ่ม:
+              <label className="text-[10px] font-bold text-slate-700 flex items-center gap-1">
+                <Clock className="h-2.5 w-2.5 text-indigo-600" /> เวลาเริ่ม:
               </label>
               <input
                 type="time"
                 value={filter.startTime || ''}
                 onChange={(e) => setFilter(prev => ({ ...prev, startTime: e.target.value }))}
-                className="w-full rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs text-stone-900 focus:border-amber-700 focus:outline-none"
+                className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none"
               />
             </div>
 
             {/* End Time & Shift Presets */}
             <div className="space-y-0.5">
               <div className="flex items-center justify-between">
-                <label className="text-[10px] font-bold text-stone-700 flex items-center gap-1">
-                  <Clock className="h-2.5 w-2.5 text-amber-700" /> เวลาสิ้นสุด:
+                <label className="text-[10px] font-bold text-slate-700 flex items-center gap-1">
+                  <Clock className="h-2.5 w-2.5 text-indigo-600" /> เวลาสิ้นสุด:
                 </label>
                 <div className="flex items-center gap-1 text-[9px]">
                   <button
                     type="button"
                     onClick={() => handleApplyTimeShift('morning')}
-                    className="text-amber-800 font-bold hover:underline"
+                    className="text-indigo-600 font-bold hover:underline"
                   >
                     กะเช้า
                   </button>
-                  <span className="text-stone-300">|</span>
+                  <span className="text-slate-300">|</span>
                   <button
                     type="button"
                     onClick={() => handleApplyTimeShift('afternoon')}
-                    className="text-amber-800 font-bold hover:underline"
+                    className="text-indigo-600 font-bold hover:underline"
                   >
                     กะบ่าย
                   </button>
@@ -484,15 +484,15 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                 type="time"
                 value={filter.endTime || ''}
                 onChange={(e) => setFilter(prev => ({ ...prev, endTime: e.target.value }))}
-                className="w-full rounded-lg border border-stone-200 bg-white px-2.5 py-1 text-xs text-stone-900 focus:border-amber-700 focus:outline-none"
+                className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none"
               />
             </div>
           </div>
         )}
 
         {/* Filter Summary Strip */}
-        <div className="flex flex-wrap items-center justify-between gap-2 pt-1.5 text-xs border-t border-stone-200">
-          <div className="flex items-center gap-3 text-stone-700 text-xs">
+        <div className="flex flex-wrap items-center justify-between gap-2 pt-1.5 text-xs border-t border-slate-200">
+          <div className="flex items-center gap-3 text-slate-700 text-xs">
             <span>
               รับ: <strong className="text-emerald-700 font-bold">+{formatCurrency(totalIncome, settings.currencySymbol)}</strong>
             </span>
@@ -507,8 +507,8 @@ export const TransactionList: React.FC<TransactionListProps> = ({
           </div>
 
           {isFilteredActive && (
-            <div className="text-[10px] sm:text-[11px] text-amber-800 font-bold flex items-center gap-1">
-              <Sparkles className="h-2.5 w-2.5 text-amber-600" />
+            <div className="text-[10px] sm:text-[11px] text-indigo-700 font-bold flex items-center gap-1">
+              <Sparkles className="h-2.5 w-2.5 text-indigo-500" />
               ผลลัพธ์ {transactions.length} รายการ
             </div>
           )}
@@ -524,7 +524,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
             return (
               <div
                 key={tx.id}
-                className="group relative flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 rounded-lg border border-stone-200/80 bg-white p-2.5 sm:p-3 transition-all hover:border-amber-400 hover:shadow-2xs"
+                className="group relative flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 rounded-lg border border-slate-200 bg-white p-2.5 sm:p-3 transition-all hover:border-indigo-300 hover:shadow-2xs"
               >
                 {/* Left details */}
                 <div className="flex items-start sm:items-center gap-2.5 min-w-0">
@@ -540,10 +540,10 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                   {/* Text Details */}
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-1.5">
-                      <span className="font-bold text-stone-900 text-xs sm:text-sm truncate">
+                      <span className="font-bold text-slate-900 text-xs sm:text-sm truncate">
                         {tx.category}
                       </span>
-                      <span className="font-mono text-[10px] text-stone-600 bg-stone-100 px-1.5 py-0.5 rounded border border-stone-200">
+                      <span className="font-mono text-[10px] text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">
                         {tx.referenceNumber || tx.id.slice(0, 8)}
                       </span>
                       {tx.isOfflinePending && (
@@ -553,18 +553,18 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                       )}
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-stone-500 mt-0.5">
-                      <span className="font-medium text-stone-700 flex items-center gap-0.5">
-                        <Clock className="h-2.5 w-2.5 text-stone-400" />
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-slate-500 mt-0.5">
+                      <span className="font-medium text-slate-700 flex items-center gap-0.5">
+                        <Clock className="h-2.5 w-2.5 text-slate-400" />
                         {formatDateThai(tx.date, tx.time)}
                       </span>
                       {tx.vendorOrCustomer && (
-                        <span className="text-stone-800 font-medium">
+                        <span className="text-slate-800 font-medium">
                           • {tx.vendorOrCustomer}
                         </span>
                       )}
                       {tx.note && (
-                        <span className="text-stone-600 truncate max-w-xs">
+                        <span className="text-slate-600 truncate max-w-xs">
                           • {tx.note}
                         </span>
                       )}
@@ -573,9 +573,9 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                 </div>
 
                 {/* Right: Payment badge, Slip preview, Amount, Actions */}
-                <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-stone-100">
+                <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100">
                   {/* Payment method badge */}
-                  <span className="rounded-md bg-stone-100 px-2 py-0.5 text-[10px] text-stone-700 font-semibold border border-stone-200">
+                  <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[10px] text-slate-700 font-semibold border border-slate-200">
                     {tx.paymentMethod === 'cash' && 'เงินสด'}
                     {tx.paymentMethod === 'qr_promptpay' && 'QR พร้อมเพย์'}
                     {tx.paymentMethod === 'transfer' && 'โอนธนาคาร'}
@@ -587,14 +587,14 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                   {tx.slipUrl ? (
                     <button
                       onClick={() => onViewReceipt(tx)}
-                      className="flex items-center gap-1 rounded-md border border-amber-200 bg-amber-50 px-2 py-0.5 text-[11px] font-bold text-amber-800 hover:bg-amber-100 transition-colors shadow-2xs cursor-pointer"
+                      className="flex items-center gap-1 rounded-md border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-[11px] font-bold text-indigo-700 hover:bg-indigo-100 transition-colors shadow-2xs"
                       title="คลิกเพื่อดูสลิปภาพต้นฉบับ & QR Code"
                     >
-                      <QrCode className="h-3 w-3 text-amber-700" />
+                      <QrCode className="h-3 w-3 text-indigo-600" />
                       <span>สลิป</span>
                     </button>
                   ) : (
-                    <span className="text-[10px] text-stone-400 px-1 font-medium">ไม่มีสลิป</span>
+                    <span className="text-[10px] text-slate-400 px-1 font-medium">ไม่มีสลิป</span>
                   )}
 
                   {/* Amount */}
@@ -608,7 +608,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                   <div className="flex items-center gap-0.5">
                     <button
                       onClick={() => onEdit(tx)}
-                      className="rounded-md p-1.5 text-stone-600 hover:bg-stone-100 hover:text-stone-900 transition-colors cursor-pointer"
+                      className="rounded-md p-1.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"
                       title="แก้ไขข้อมูลรายการบันทึกนี้"
                     >
                       <Edit3 className="h-3.5 w-3.5" />
@@ -621,13 +621,13 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                             onDelete(tx.id);
                             setDeleteConfirmId(null);
                           }}
-                          className="text-[11px] text-white bg-rose-600 font-bold px-1.5 py-0.5 hover:bg-rose-700 rounded transition-colors cursor-pointer"
+                          className="text-[11px] text-white bg-rose-600 font-bold px-1.5 py-0.5 hover:bg-rose-700 rounded transition-colors"
                         >
                           ลบ
                         </button>
                         <button
                           onClick={() => setDeleteConfirmId(null)}
-                          className="text-[11px] text-stone-500 hover:text-stone-800 px-1 cursor-pointer"
+                          className="text-[11px] text-slate-500 hover:text-slate-800 px-1"
                         >
                           ✕
                         </button>
@@ -635,7 +635,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                     ) : (
                       <button
                         onClick={() => setDeleteConfirmId(tx.id)}
-                        className="rounded-md p-1.5 text-stone-400 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+                        className="rounded-md p-1.5 text-slate-400 hover:bg-rose-50 hover:text-rose-600 transition-colors"
                         title="ลบรายการ"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
@@ -647,17 +647,17 @@ export const TransactionList: React.FC<TransactionListProps> = ({
             );
           })
         ) : (
-          <div className="rounded-xl border border-stone-200 bg-stone-50/70 py-10 text-center text-stone-400">
-            <Receipt className="h-10 w-10 mx-auto mb-2 text-stone-300" />
-            <p className="text-sm font-bold text-stone-800">ไม่พบรายการบันทึกตามเงื่อนไขที่เลือก</p>
-            <p className="text-[11px] text-stone-500 mt-0.5 max-w-sm mx-auto">
+          <div className="rounded-xl border border-slate-200 bg-slate-50 py-10 text-center text-slate-400">
+            <Receipt className="h-10 w-10 mx-auto mb-2 text-slate-300" />
+            <p className="text-sm font-bold text-slate-800">ไม่พบรายการบันทึกตามเงื่อนไขที่เลือก</p>
+            <p className="text-[11px] text-slate-500 mt-0.5 max-w-sm mx-auto">
               ลองปรับเปลี่ยนช่วงวัน-เวลา คำค้นหา หรือกดปุ่ม "ล้างตัวกรอง" เพื่อแสดงรายการทั้งหมด
             </p>
             {isFilteredActive && (
               <button
                 type="button"
                 onClick={handleResetFilters}
-                className="mt-3 inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-bold text-white hover:bg-stone-800 transition-colors cursor-pointer"
+                className="mt-3 inline-flex items-center gap-1 rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-bold text-white hover:bg-slate-800 transition-colors"
               >
                 <RotateCcw className="h-3 w-3" />
                 ล้างตัวกรองและแสดงทั้งหมด

@@ -1,6 +1,6 @@
 {
   "name": "Cafe Income & Expense Manager",
-  "description": "ระบบบันทึกและสรุปรายรับรายจ่าย คาเฟ่ วิทยาลัยเทคนิควังน้ำเย็น พร้อมระบบนำเข้าไฟล์ Excel/CSV หรือวางข้อความเพื่อสรุปผลทันที กราฟวิเคราะห์ข้อมูล ระบบพิมพ์รายงานและแปลงสลิปเป็น QR Code บันทึกข้อมูลผ่าน Firebase และรองรับ Offline-first",
+  "description": "ระบบสรุปรายรับ-รายจ่าย คาเฟ่ วิทยาลัยเทคนิควังน้ำเย็น พร้อมระบบนำเข้าไฟล์ Excel/CSV หรือวางข้อความเพื่อสรุปผลทันที กราฟวิเคราะห์ข้อมูล ระบบพิมพ์รายงานและแปลงสลิปเป็น QR Code บันทึกข้อมูลผ่าน Firebase และรองรับ Offline-first",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

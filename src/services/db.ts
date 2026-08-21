@@ -56,8 +56,8 @@ export const DEFAULT_STAFF_ACCOUNTS: StaffAccount[] = [
 ];
 
 export const DEFAULT_CAFE_SETTINGS: CafeSettings = {
-  cafeName: 'คาเฟ่ วิทยาลัยเทคนิควังน้ำเย็น',
-  cafeBranch: 'สาขาหลัก',
+  cafeName: 'ระบบสรุปรายรับ-รายจ่าย คาเฟ่ วิทยาลัยเทคนิควังน้ำเย็น',
+  cafeBranch: 'วิทยาลัยเทคนิควังน้ำเย็น',
   phone: '037-251-456',
   address: 'วิทยาลัยเทคนิควังน้ำเย็น ต.วังน้ำเย็น อ.วังน้ำเย็น จ.สระแก้ว 27210',
   taxId: '0994000165032',

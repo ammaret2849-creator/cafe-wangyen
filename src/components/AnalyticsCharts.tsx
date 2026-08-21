@@ -30,8 +30,8 @@ interface AnalyticsChartsProps {
 }
 
 const MODERN_PALETTE = [
-  '#92400E', '#059669', '#D97706', '#E11D48', '#78350F', 
-  '#0D9488', '#EA580C', '#451A03', '#16A34A', '#CA8A04'
+  '#2563EB', '#10B981', '#F59E0B', '#EC4899', '#8B5CF6', 
+  '#06B6D4', '#F97316', '#6366F1', '#14B8A6', '#84CC16'
 ];
 
 export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, settings }) => {
@@ -44,8 +44,8 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
       const expense = payload.find((p: any) => p.dataKey === 'expense')?.value || 0;
       const net = income - expense;
       return (
-        <div className="rounded-2xl border border-stone-200 bg-white p-3.5 shadow-xl text-xs">
-          <div className="font-bold text-stone-900 mb-2 border-b border-stone-100 pb-1">
+        <div className="rounded-2xl border border-slate-200 bg-white p-3.5 shadow-xl text-xs">
+          <div className="font-bold text-slate-900 mb-2 border-b border-slate-100 pb-1">
             วันที่ {label} {stats.month}
           </div>
           <div className="space-y-1.5">
@@ -61,7 +61,7 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
               </span>
               <span className="font-bold">{formatCurrency(expense, settings.currencySymbol)}</span>
             </div>
-            <div className="flex items-center justify-between gap-4 text-stone-900 border-t border-stone-100 pt-1.5 font-bold">
+            <div className="flex items-center justify-between gap-4 text-slate-900 border-t border-slate-100 pt-1.5 font-bold">
               <span>กำไรสุทธิ:</span>
               <span className={net >= 0 ? 'text-emerald-600' : 'text-rose-600'}>
                 {net >= 0 ? '+' : ''}{formatCurrency(net, settings.currencySymbol)}
@@ -79,13 +79,13 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
     if (active && payload && payload.length) {
       const data = payload[0];
       return (
-        <div className="rounded-xl border border-stone-200 bg-white p-3 shadow-xl text-xs">
-          <div className="font-bold text-stone-900">{data.name}</div>
-          <div className="mt-1 text-amber-800 font-bold">
+        <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-xl text-xs">
+          <div className="font-bold text-slate-900">{data.name}</div>
+          <div className="mt-1 text-indigo-600 font-bold">
             {formatCurrency(data.value, settings.currencySymbol)} ({data.payload.percentage?.toFixed(1)}%)
           </div>
           {data.payload.count && (
-            <div className="text-stone-500 text-[11px] mt-0.5">
+            <div className="text-slate-500 text-[11px] mt-0.5">
               จำนวน {data.payload.count} รายการ
             </div>
           )}
@@ -120,27 +120,27 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
   const overheadPercent = stats.totalIncome > 0 ? ((utilitiesExpense + rentExpense + salaryExpense) / stats.totalIncome) * 100 : 0;
 
   return (
-    <div className="rounded-xl border border-stone-200/90 bg-white/95 p-3.5 sm:p-4 shadow-2xs space-y-3.5">
+    <div className="rounded-xl border border-slate-200 bg-white p-3.5 sm:p-4 shadow-2xs space-y-3.5">
       {/* Chart Navigation Tabs */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-stone-100 pb-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-slate-100 pb-3">
         <div>
-          <h3 className="font-bold text-stone-900 flex items-center gap-1.5 text-sm sm:text-base leading-tight">
-            <BarChart3 className="h-4 w-4 text-amber-800" />
+          <h3 className="font-bold text-slate-900 flex items-center gap-1.5 text-sm sm:text-base leading-tight">
+            <BarChart3 className="h-4 w-4 text-indigo-600" />
             กราฟวิเคราะห์รายรับ-รายจ่าย & ประสิทธิภาพคาเฟ่
           </h3>
-          <p className="text-[11px] text-stone-500 mt-0.5">
+          <p className="text-[11px] text-slate-500 mt-0.5">
             แสดงแนวโน้มยอดขายรายวัน สัดส่วนต้นทุน และช่องทางการชำระเงิน
           </p>
         </div>
 
         {/* Tab Buttons */}
-        <div className="flex flex-wrap items-center gap-1 bg-stone-100 p-0.5 rounded-lg border border-stone-200 text-xs">
+        <div className="flex flex-wrap items-center gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200 text-xs">
           <button
             onClick={() => setActiveTab('daily')}
             className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-bold transition-all ${
               activeTab === 'daily'
-                ? 'bg-white text-stone-900 shadow-2xs'
-                : 'text-stone-600 hover:text-stone-900'
+                ? 'bg-white text-slate-900 shadow-2xs'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             <TrendingUp className="h-3 w-3 text-emerald-600" />
@@ -150,33 +150,33 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ stats, setting
             onClick={() => setActiveTab('categories')}
             className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-bold transition-all ${
               activeTab === 'categories'
-                ? 'bg-white text-stone-900 shadow-2xs'
-                : 'text-stone-600 hover:text-stone-900'
+                ? 'bg-white text-slate-900 shadow-2xs'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <PieIcon className="h-3 w-3 text-amber-700" />
+            <PieIcon className="h-3 w-3 text-indigo-600" />
             หมวดหมู่
           </button>
           <button
             onClick={() => setActiveTab('cost_structure')}
             className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-bold transition-all ${
               activeTab === 'cost_structure'
-                ? 'bg-white text-stone-900 shadow-2xs'
-                : 'text-stone-600 hover:text-stone-900'
+                ? 'bg-white text-slate-900 shadow-2xs'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <Layers className="h-3 w-3 text-amber-800" />
+            <Layers className="h-3 w-3 text-amber-600" />
             โครงสร้างต้นทุน
           </button>
           <button
             onClick={() => setActiveTab('payments')}
             className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-bold transition-all ${
               activeTab === 'payments'
-                ? 'bg-white text-stone-900 shadow-2xs'
-                : 'text-stone-600 hover:text-stone-900'
+                ? 'bg-white text-slate-900 shadow-2xs'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <CreditCard className="h-3 w-3 text-stone-700" />
+            <CreditCard className="h-3 w-3 text-sky-600" />
             วิธีชำระเงิน
           </button>
         </div>

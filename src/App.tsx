@@ -89,7 +89,7 @@ function CafeDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-stone-900 flex flex-col font-sans selection:bg-amber-800 selection:text-white">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-indigo-600 selection:text-white">
       {/* Top Navbar */}
       <Navbar
         onOpenAddIncome={() => handleOpenAdd('income')}
@@ -127,14 +127,14 @@ function CafeDashboard() {
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h4 className="font-bold text-xs sm:text-sm text-stone-900">
+                  <h4 className="font-bold text-xs sm:text-sm text-slate-900">
                     นำเข้าไฟล์สรุปผลรายรับ-รายจ่ายทันที (Instant Excel & CSV)
                   </h4>
                   <span className="hidden sm:inline-flex rounded-full bg-emerald-200/80 text-emerald-900 font-extrabold text-[10px] px-2 py-0.5 border border-emerald-300">
                     พร้อมใช้
                   </span>
                 </div>
-                <p className="text-[11px] text-stone-600 mt-0.5 line-clamp-1 sm:line-clamp-none">
+                <p className="text-[11px] text-slate-600 mt-0.5 line-clamp-1 sm:line-clamp-none">
                   คลิกที่นี่หรือลากไฟล์ Excel, CSV หรือกดวางข้อความ (Ctrl + V) เพื่อคำนวณยอดกำไรและสถิติทันที
                 </p>
               </div>
@@ -143,7 +143,7 @@ function CafeDashboard() {
             <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
               <button
                 type="button"
-                className="flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-bold text-white shadow-2xs group-hover:bg-emerald-700 transition-colors whitespace-nowrap cursor-pointer"
+                className="flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-bold text-white shadow-2xs group-hover:bg-emerald-700 transition-colors whitespace-nowrap"
               >
                 <Upload className="h-3.5 w-3.5" />
                 <span>เปิดระบบนำเข้า</span>
@@ -169,16 +169,14 @@ function CafeDashboard() {
       </main>
 
       {/* Clean Modern Footer */}
-      <footer className="border-t border-stone-200/90 bg-white/95 py-3.5 text-center text-xs text-stone-500">
+      <footer className="border-t border-slate-200 bg-white py-3.5 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <CollegeLogo size={24} customUrl={settings.logoUrl} />
-            <span className="font-bold text-stone-800 text-xs">{settings.cafeName}</span>
-            {settings.cafeBranch && settings.cafeBranch !== settings.cafeName && (
-              <span className="text-[11px] text-stone-500">• {settings.cafeBranch}</span>
-            )}
+            <span className="font-bold text-slate-800 text-xs">{settings.cafeName}</span>
+            <span className="text-[11px]">• {settings.cafeBranch || 'วิทยาลัยเทคนิควังน้ำเย็น'}</span>
           </div>
-          <div className="text-stone-400 text-[11px]">
+          <div className="text-slate-400 text-[11px]">
             <span>ระบบบริหารจัดการรายรับ-รายจ่าย คาเฟ่</span>
           </div>
         </div>

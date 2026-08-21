@@ -4,7 +4,7 @@ import {
   GoogleAuthProvider, 
   signInWithPopup, 
   signOut as fbSignOut,
-  onAuthStateChanged, 
+  onAuthStateChanged,
   User as FirebaseUser,
   signInAnonymously
 } from 'firebase/auth';
@@ -13,9 +13,7 @@ import {
   persistentLocalCache, 
   persistentMultipleTabManager,
   getFirestore,
-  Firestore,
-  doc,
-  getDocFromServer
+  Firestore
 } from 'firebase/firestore';
 import firebaseConfigData from '../../firebase-applet-config.json';
 
@@ -31,7 +29,7 @@ const firebaseConfig = {
 // Initialize Firebase App
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
-// Initialize Firestore with custom databaseId and persistent cache for offline resilience
+// Initialize Firestore with custom databaseId and persistent cache for full offline capability
 const databaseId = firebaseConfigData.firestoreDatabaseId || "(default)";
 
 let db: Firestore;
@@ -40,7 +38,6 @@ try {
     localCache: persistentLocalCache({
       tabManager: persistentMultipleTabManager(),
     }),
-    experimentalAutoDetectLongPolling: true,
   }, databaseId);
 } catch {
   // If already initialized or fallback
@@ -58,66 +55,6 @@ googleProvider.setCustomParameters({
   prompt: 'select_account'
 });
 
-// Error handling conforming to Firebase skill
-export enum OperationType {
-  CREATE = 'create',
-  UPDATE = 'update',
-  DELETE = 'delete',
-  LIST = 'list',
-  GET = 'get',
-  WRITE = 'write',
-}
-
-export interface FirestoreErrorInfo {
-  error: string;
-  operationType: OperationType;
-  path: string | null;
-  authInfo: {
-    userId?: string | null;
-    email?: string | null;
-    emailVerified?: boolean | null;
-    isAnonymous?: boolean | null;
-    tenantId?: string | null;
-    providerInfo?: {
-      providerId?: string | null;
-      email?: string | null;
-    }[];
-  };
-}
-
-export function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null): FirestoreErrorInfo {
-  const errInfo: FirestoreErrorInfo = {
-    error: error instanceof Error ? error.message : String(error),
-    authInfo: {
-      userId: auth.currentUser?.uid,
-      email: auth.currentUser?.email,
-      emailVerified: auth.currentUser?.emailVerified,
-      isAnonymous: auth.currentUser?.isAnonymous,
-      tenantId: auth.currentUser?.tenantId,
-      providerInfo: auth.currentUser?.providerData?.map(provider => ({
-        providerId: provider.providerId,
-        email: provider.email,
-      })) || []
-    },
-    operationType,
-    path
-  };
-  console.warn('Firestore Error Info:', JSON.stringify(errInfo));
-  return errInfo;
-}
-
-// Check connection gracefully as required by Firebase skill
-async function testFirestoreConnection() {
-  try {
-    await getDocFromServer(doc(db, '_health', 'status'));
-  } catch (error) {
-    if (error instanceof Error && (error.message.includes('the client is offline') || error.message.includes('unavailable'))) {
-      console.info("Firestore is currently operating in offline/cached mode.");
-    }
-  }
-}
-testFirestoreConnection();
-
 export { 
   app, 
   db, 
@@ -129,4 +66,3 @@ export {
   signInAnonymously,
   type FirebaseUser 
 };
-

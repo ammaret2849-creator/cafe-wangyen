@@ -159,8 +159,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
         );
       case 'manager':
         return (
-          <span className="inline-flex items-center gap-1 rounded-full bg-stone-100 px-2.5 py-0.5 text-xs font-bold text-stone-800 border border-stone-300">
-            <Briefcase className="h-3 w-3 text-stone-700" />
+          <span className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2.5 py-0.5 text-xs font-bold text-indigo-700 border border-indigo-200">
+            <Briefcase className="h-3 w-3 text-indigo-600" />
             ผู้จัดการร้าน (Manager)
           </span>
         );
@@ -177,16 +177,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <>
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/60 p-4 backdrop-blur-xs">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-xs">
         <div 
-          className="relative flex w-full max-w-lg flex-col overflow-hidden rounded-3xl bg-white border border-stone-200 text-stone-900 shadow-2xl transition-all"
+          className="relative flex w-full max-w-lg flex-col overflow-hidden rounded-3xl bg-white border border-slate-200 text-slate-900 shadow-2xl transition-all"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Top Visual Header */}
-          <div className="relative overflow-hidden bg-gradient-to-br from-stone-900 via-stone-800 to-amber-950 px-6 py-6 text-white border-b border-stone-800">
+          <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 px-6 py-6 text-white border-b border-slate-800">
             {/* Subtle Ambient Glows */}
-            <div className="absolute -top-12 -right-12 h-36 w-36 rounded-full bg-amber-500/20 blur-2xl" />
-            <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-amber-700/15 blur-2xl" />
+            <div className="absolute -top-12 -right-12 h-36 w-36 rounded-full bg-indigo-500/20 blur-2xl" />
+            <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-rose-500/15 blur-2xl" />
 
             <div className="relative flex items-center justify-between">
               <div className="flex items-center gap-3.5">
@@ -199,15 +199,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                       ระบบเข้าสู่ระบบและจัดการสิทธิ์
                     </h3>
                   </div>
-                  <p className="text-xs text-stone-300 font-medium">
-                    วิทยาลัยเทคนิควังน้ำเย็น
+                  <p className="text-xs text-slate-300 font-medium">
+                    คาเฟ่ วิทยาลัยเทคนิควังน้ำเย็น
                   </p>
                 </div>
               </div>
 
               <button
                 onClick={onClose}
-                className="rounded-xl p-2 text-stone-400 hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
+                className="rounded-xl p-2 text-slate-400 hover:bg-white/10 hover:text-white transition-colors"
                 title="ปิดหน้าต่าง"
               >
                 <X className="h-5 w-5" />
@@ -217,29 +217,29 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
 
           {/* Current Logged-in Profile Banner */}
           {user && (
-            <div className="mx-6 mt-5 p-4 rounded-2xl bg-stone-50 border border-stone-200 shadow-2xs">
+            <div className="mx-6 mt-5 p-4 rounded-2xl bg-slate-50 border border-slate-200 shadow-2xs">
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3 min-w-0">
                   {user.photoURL ? (
                     <img 
                       src={user.photoURL} 
                       alt={user.displayName} 
-                      className="h-11 w-11 rounded-2xl object-cover border border-stone-300 shrink-0"
+                      className="h-11 w-11 rounded-2xl object-cover border border-slate-300 shrink-0"
                       referrerPolicy="no-referrer"
                     />
                   ) : (
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-stone-900 font-extrabold text-white text-base shadow-xs">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-slate-900 font-extrabold text-white text-base shadow-xs">
                       {user.displayName.charAt(0).toUpperCase()}
                     </div>
                   )}
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-bold text-sm text-stone-900 truncate">
+                      <span className="font-bold text-sm text-slate-900 truncate">
                         {user.displayName}
                       </span>
                       {getRoleBadge(user.role)}
                     </div>
-                    <div className="text-xs text-stone-500 truncate mt-0.5">
+                    <div className="text-xs text-slate-500 truncate mt-0.5">
                       {user.email || user.phoneNumber || 'บัญชีพนักงานร้าน'}
                     </div>
                   </div>
@@ -248,7 +248,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                 <button
                   type="button"
                   onClick={() => signOut()}
-                  className="flex shrink-0 items-center gap-1.5 text-xs text-rose-600 hover:bg-rose-100 bg-rose-50 px-3 py-2 rounded-xl border border-rose-200 font-bold transition-all hover:shadow-2xs cursor-pointer"
+                  className="flex shrink-0 items-center gap-1.5 text-xs text-rose-600 hover:bg-rose-100 bg-rose-50 px-3 py-2 rounded-xl border border-rose-200 font-bold transition-all hover:shadow-2xs"
                 >
                   <LogOut className="h-3.5 w-3.5" />
                   <span>ออกจากระบบ</span>
@@ -259,38 +259,38 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
 
           {/* Segmented Tab Navigation */}
           <div className="px-6 pt-5">
-            <div className="grid grid-cols-3 gap-1.5 p-1 bg-stone-100 rounded-2xl border border-stone-200 text-xs font-semibold">
+            <div className="grid grid-cols-3 gap-1.5 p-1 bg-slate-100 rounded-2xl border border-slate-200 text-xs font-semibold">
               <button
                 type="button"
                 onClick={() => setTab('quick')}
-                className={`flex items-center justify-center gap-1.5 py-2.5 rounded-xl transition-all cursor-pointer ${
+                className={`flex items-center justify-center gap-1.5 py-2.5 rounded-xl transition-all ${
                   tab === 'quick'
-                    ? 'bg-white text-stone-900 font-bold shadow-xs border border-stone-200'
-                    : 'text-stone-500 hover:text-stone-900'
+                    ? 'bg-white text-slate-900 font-bold shadow-xs border border-slate-200'
+                    : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
-                <Users className="h-3.5 w-3.5 text-amber-800" />
+                <Users className="h-3.5 w-3.5 text-amber-600" />
                 <span>สลับบัญชีด่วน</span>
               </button>
               <button
                 type="button"
                 onClick={() => setTab('phone')}
-                className={`flex items-center justify-center gap-1.5 py-2.5 rounded-xl transition-all cursor-pointer ${
+                className={`flex items-center justify-center gap-1.5 py-2.5 rounded-xl transition-all ${
                   tab === 'phone'
-                    ? 'bg-white text-stone-900 font-bold shadow-xs border border-stone-200'
-                    : 'text-stone-500 hover:text-stone-900'
+                    ? 'bg-white text-slate-900 font-bold shadow-xs border border-slate-200'
+                    : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
-                <Phone className="h-3.5 w-3.5 text-amber-800" />
+                <Phone className="h-3.5 w-3.5 text-indigo-600" />
                 <span>เบอร์โทรศัพท์</span>
               </button>
               <button
                 type="button"
                 onClick={() => setTab('google')}
-                className={`flex items-center justify-center gap-1.5 py-2.5 rounded-xl transition-all cursor-pointer ${
+                className={`flex items-center justify-center gap-1.5 py-2.5 rounded-xl transition-all ${
                   tab === 'google'
-                    ? 'bg-white text-stone-900 font-bold shadow-xs border border-stone-200'
-                    : 'text-stone-500 hover:text-stone-900'
+                    ? 'bg-white text-slate-900 font-bold shadow-xs border border-slate-200'
+                    : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
                 <Mail className="h-3.5 w-3.5 text-rose-600" />
@@ -311,12 +311,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             {/* TAB 1: QUICK SWITCH & REAL STAFF ACCOUNTS */}
             {tab === 'quick' && (
               <div className="space-y-3">
-                <div className="flex items-center justify-between text-xs text-stone-600 font-semibold pb-1">
+                <div className="flex items-center justify-between text-xs text-slate-600 font-semibold pb-1">
                   <span>เลือกตำแหน่งเพื่อเข้าใช้งาน หรือกดแก้ไข/ลบ:</span>
                   <button
                     type="button"
                     onClick={handleOpenAddStaff}
-                    className="flex items-center gap-1 text-amber-800 hover:text-amber-900 font-bold bg-amber-50 hover:bg-amber-100 px-2.5 py-1 rounded-lg transition-colors cursor-pointer border border-amber-200"
+                    className="flex items-center gap-1 text-indigo-600 hover:text-indigo-800 font-bold bg-indigo-50 hover:bg-indigo-100 px-2.5 py-1 rounded-lg transition-colors"
                   >
                     <Plus className="h-3.5 w-3.5" />
                     <span>เพิ่มตำแหน่งใหม่</span>
@@ -332,19 +332,19 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     const cardBg = isStaffOwner 
                       ? 'border-amber-200 bg-amber-50/40 hover:bg-amber-50/80 hover:border-amber-300' 
                       : isStaffManager 
-                        ? 'border-stone-300 bg-stone-50/70 hover:bg-stone-100 hover:border-stone-400' 
+                        ? 'border-indigo-200 bg-indigo-50/40 hover:bg-indigo-50/80 hover:border-indigo-300' 
                         : 'border-emerald-200 bg-emerald-50/40 hover:bg-emerald-50/80 hover:border-emerald-300';
 
                     const iconBg = isStaffOwner 
                       ? 'bg-amber-100 text-amber-800 border-amber-200' 
                       : isStaffManager 
-                        ? 'bg-stone-200 text-stone-800 border-stone-300' 
+                        ? 'bg-indigo-100 text-indigo-800 border-indigo-200' 
                         : 'bg-emerald-100 text-emerald-800 border-emerald-200';
 
                     const badgeBg = isStaffOwner 
                       ? 'bg-amber-100 text-amber-900 border-amber-200' 
                       : isStaffManager 
-                        ? 'bg-stone-200 text-stone-900 border-stone-300' 
+                        ? 'bg-indigo-100 text-indigo-900 border-indigo-200' 
                         : 'bg-emerald-100 text-emerald-900 border-emerald-200';
 
                     return (
@@ -355,17 +355,17 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                       >
                         <div className="flex items-center gap-3 min-w-0">
                           <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-transform group-hover:scale-105 ${iconBg}`}>
-                            {isStaffOwner ? <Crown className="h-5 w-5 text-amber-700" /> : isStaffManager ? <Briefcase className="h-5 w-5 text-stone-700" /> : <Coffee className="h-5 w-5 text-emerald-600" />}
+                            {isStaffOwner ? <Crown className="h-5 w-5 text-amber-600" /> : isStaffManager ? <Briefcase className="h-5 w-5 text-indigo-600" /> : <Coffee className="h-5 w-5 text-emerald-600" />}
                           </div>
                           <div className="min-w-0">
-                            <div className="font-bold text-sm text-stone-900 flex items-center gap-2 flex-wrap">
+                            <div className="font-bold text-sm text-slate-900 flex items-center gap-2 flex-wrap">
                               <span className="truncate">{staff.name}</span>
                               <span className={`rounded-md px-1.5 py-0.5 text-[10px] font-bold border ${badgeBg}`}>
                                 {staff.role === 'owner' ? 'เจ้าของร้าน' : staff.role === 'manager' ? 'ผู้จัดการร้าน' : 'บาริสต้า / แคชเชียร์'}
                               </span>
                             </div>
-                            <div className="text-xs text-stone-500 truncate mt-0.5">
-                              เบอร์โทร: <strong className="text-stone-700 font-mono">{staff.phoneNumber}</strong> • {staff.description || 'พนักงานร้าน'}
+                            <div className="text-xs text-slate-500 truncate mt-0.5">
+                              เบอร์โทร: <strong className="text-slate-700 font-mono">{staff.phoneNumber}</strong> • {staff.description || 'พนักงานร้าน'}
                             </div>
                           </div>
                         </div>
@@ -375,7 +375,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                           <button
                             type="button"
                             onClick={(e) => handleOpenEditStaff(e, staff)}
-                            className="p-1.5 rounded-lg text-stone-400 hover:text-amber-800 hover:bg-white/80 transition-colors cursor-pointer"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-white/80 transition-colors"
                             title="แก้ไขข้อมูลตำแหน่ง"
                           >
                             <Pencil className="h-4 w-4" />
@@ -383,13 +383,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                           <button
                             type="button"
                             onClick={(e) => handleDeleteStaff(e, staff)}
-                            className="p-1.5 rounded-lg text-stone-400 hover:text-rose-600 hover:bg-white/80 transition-colors cursor-pointer"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-white/80 transition-colors"
                             title="ลบตำแหน่งนี้"
                           >
                             <Trash2 className="h-4 w-4" />
                           </button>
                           <div className="pl-1">
-                            <ChevronRight className="h-5 w-5 text-stone-400 group-hover:text-stone-700 group-hover:translate-x-0.5 transition-transform" />
+                            <ChevronRight className="h-5 w-5 text-slate-400 group-hover:text-slate-700 group-hover:translate-x-0.5 transition-transform" />
                           </div>
                         </div>
                       </div>
@@ -401,7 +401,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                 <button
                   type="button"
                   onClick={handleOpenAddStaff}
-                  className="w-full mt-2 py-3 px-4 rounded-2xl border-2 border-dashed border-stone-300 hover:border-amber-700 hover:bg-amber-50/50 text-stone-600 hover:text-amber-800 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  className="w-full mt-2 py-3 px-4 rounded-2xl border-2 border-dashed border-slate-300 hover:border-indigo-500 hover:bg-indigo-50/50 text-slate-600 hover:text-indigo-700 text-xs font-bold flex items-center justify-center gap-2 transition-all"
                 >
                   <Plus className="h-4 w-4" />
                   <span>+ เพิ่มตำแหน่ง / พนักงานใหม่เข้าสู่ระบบ</span>
@@ -413,7 +413,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             {tab === 'phone' && (
               <form onSubmit={handlePhoneSubmit} className="space-y-4">
                 <div className="flex items-center justify-between text-xs pb-1">
-                  <span className="font-bold text-stone-800">
+                  <span className="font-bold text-slate-800">
                     {phoneMode === 'login' ? 'เข้าสู่ระบบด้วยเบอร์โทรศัพท์' : 'ลงทะเบียนผู้ใช้งานใหม่'}
                   </span>
                   <button
@@ -422,7 +422,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                       setPhoneMode(phoneMode === 'login' ? 'register' : 'login');
                       setErrorMsg('');
                     }}
-                    className="text-amber-800 hover:underline font-bold cursor-pointer"
+                    className="text-indigo-600 hover:underline font-bold"
                   >
                     {phoneMode === 'login' ? '+ สมัครสมาชิกใหม่' : '← มีบัญชีแล้ว เข้าสู่ระบบ'}
                   </button>
@@ -430,8 +430,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
 
                 {phoneMode === 'register' && (
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-stone-700 flex items-center gap-1.5">
-                      <User className="h-3.5 w-3.5 text-stone-400" />
+                    <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                      <User className="h-3.5 w-3.5 text-slate-400" />
                       ชื่อ - นามสกุล หรือชื่อเรียกในร้าน
                     </label>
                     <input
@@ -440,14 +440,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                       placeholder="เช่น คุณสมชาย (เจ้าของร้าน)"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:border-amber-700 focus:ring-2 focus:ring-amber-100 focus:outline-none transition-all"
+                      className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 focus:outline-none transition-all"
                     />
                   </div>
                 )}
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-stone-700 flex items-center gap-1.5">
-                    <Phone className="h-3.5 w-3.5 text-stone-400" />
+                  <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                    <Phone className="h-3.5 w-3.5 text-slate-400" />
                     เบอร์โทรศัพท์ (ใช้เป็นชื่อผู้ใช้)
                   </label>
                   <input
@@ -456,13 +456,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     placeholder="เช่น 081-234-5678"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
-                    className="w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:border-amber-700 focus:ring-2 focus:ring-amber-100 focus:outline-none transition-all font-mono"
+                    className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 focus:outline-none transition-all font-mono"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-stone-700 flex items-center gap-1.5">
-                    <Lock className="h-3.5 w-3.5 text-stone-400" />
+                  <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                    <Lock className="h-3.5 w-3.5 text-slate-400" />
                     รหัสผ่าน
                   </label>
                   <div className="relative">
@@ -472,12 +472,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                       placeholder="รหัสผ่านอย่างน้อย 4 ตัวอักษร"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full rounded-xl border border-stone-300 bg-white pl-3.5 pr-10 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:border-amber-700 focus:ring-2 focus:ring-amber-100 focus:outline-none transition-all font-mono"
+                      className="w-full rounded-xl border border-slate-300 bg-white pl-3.5 pr-10 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 focus:outline-none transition-all font-mono"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 cursor-pointer"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
@@ -486,13 +486,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
 
                 {phoneMode === 'register' && (
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-stone-700">
+                    <label className="text-xs font-bold text-slate-700">
                       ตำแหน่ง / สิทธิ์การใช้งาน
                     </label>
                     <select
                       value={role}
                       onChange={(e) => setRole(e.target.value as any)}
-                      className="w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-sm text-stone-900 focus:border-amber-700 focus:ring-2 focus:ring-amber-100 focus:outline-none transition-all"
+                      className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 focus:outline-none transition-all"
                     >
                       <option value="owner">👑 เจ้าของร้าน (Owner - ดูแลทุกส่วน)</option>
                       <option value="manager">💼 ผู้จัดการร้าน (Manager - จัดการร้านและรายงาน)</option>
@@ -504,7 +504,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-stone-900 py-3 text-sm font-bold text-white hover:bg-stone-800 transition-all shadow-xs disabled:opacity-50 cursor-pointer"
+                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-3 text-sm font-bold text-white hover:bg-slate-800 transition-all shadow-xs disabled:opacity-50"
                 >
                   {loading && <Loader2 className="h-4 w-4 animate-spin" />}
                   <span>
@@ -517,14 +517,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             {/* TAB 3: GOOGLE GMAIL */}
             {tab === 'google' && (
               <div className="space-y-4 py-2">
-                <div className="rounded-2xl border border-stone-200 bg-stone-50 p-5 text-center space-y-2">
-                  <div className="flex h-12 w-12 mx-auto items-center justify-center rounded-2xl bg-white text-stone-800 shadow-xs border border-stone-200">
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-center space-y-2">
+                  <div className="flex h-12 w-12 mx-auto items-center justify-center rounded-2xl bg-white text-slate-800 shadow-xs border border-slate-200">
                     <Mail className="h-6 w-6 text-rose-600" />
                   </div>
-                  <h4 className="font-bold text-sm text-stone-900">
+                  <h4 className="font-bold text-sm text-slate-900">
                     เข้าสู่ระบบด้วยบัญชี Google
                   </h4>
-                  <p className="text-xs text-stone-500 max-w-xs mx-auto">
+                  <p className="text-xs text-slate-500 max-w-xs mx-auto">
                     ซิงค์ข้อมูลรายรับรายจ่ายกับระบบคลาวด์อัตโนมัติ เข้าถึงได้จากทุกอุปกรณ์
                   </p>
                 </div>
@@ -533,10 +533,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                   type="button"
                   onClick={handleGoogleLogin}
                   disabled={loading}
-                  className="flex w-full items-center justify-center gap-3 rounded-2xl bg-white py-3.5 px-4 text-sm font-bold text-stone-800 border border-stone-300 hover:bg-stone-50 hover:border-stone-400 transition-all shadow-xs hover:shadow-sm disabled:opacity-50 cursor-pointer"
+                  className="flex w-full items-center justify-center gap-3 rounded-2xl bg-white py-3.5 px-4 text-sm font-bold text-slate-800 border border-slate-300 hover:bg-slate-50 hover:border-slate-400 transition-all shadow-xs hover:shadow-sm disabled:opacity-50"
                 >
                   {loading ? (
-                    <Loader2 className="h-5 w-5 animate-spin text-stone-600" />
+                    <Loader2 className="h-5 w-5 animate-spin text-slate-600" />
                   ) : (
                     <svg className="h-5 w-5" viewBox="0 0 24 24">
                       <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -552,7 +552,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
           </div>
 
           {/* Footer info */}
-          <div className="border-t border-stone-100 bg-stone-50/70 px-6 py-3 text-center text-[11px] text-stone-500">
+          <div className="border-t border-slate-100 bg-slate-50/70 px-6 py-3 text-center text-[11px] text-slate-500">
             วิทยาลัยเทคนิควังน้ำเย็น • ระบบบริหารจัดการรายรับ-รายจ่าย คาเฟ่
           </div>
         </div>
